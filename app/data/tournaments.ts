@@ -350,7 +350,7 @@ export const tournaments: Tournament[] = [
         "Echo",
         "きらにゃん",
         "初心者",
-        "INF",
+        "INF.",
         "str",
         "ci",
         "alfy",
