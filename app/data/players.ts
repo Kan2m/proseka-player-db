@@ -336,7 +336,6 @@ export const players: Player[] = [
       cs22A: true,
       cs23S: true,
       cs24A: true,
-      white2025: true,
     },
     notes: "2022CS Autumn チーム「Unofficial Club」にて優勝 / 2023CS Springでは準優勝"
   },
@@ -1845,7 +1844,7 @@ export const players: Player[] = [
   name: "INF",
   twitter: "",
   aliases: ["INF"],
-  appearances: 1,
+  appearances: 3,
   result: "準決勝",
   notes: "WCS2024では韓国語版で予選突破。",
   achievements: [
@@ -1854,6 +1853,7 @@ export const players: Player[] = [
   tournaments: {
     wcs24: true,
     cs24A: true,
+    cs25: true,
   },
 },
 
