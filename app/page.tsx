@@ -24,6 +24,7 @@ const tournamentShortNames: Record<string, string> = {
 };
 
 const getResultStyle = (rank: string) => {
+  // 準優勝を先に判定するのがポイント
   if (rank === "準優勝" || rank === "U-12 準優勝") {
     return {
       className: "bg-zinc-200 text-zinc-700",
@@ -104,14 +105,14 @@ export default function Home() {
 
       if (sort === "result") {
         const rank = {
-          優勝: 1,
-          準優勝: 2,
+          "優勝": 1,
+          "準優勝": 2,
           "3位": 3,
           "4位": 4,
           "5位": 5,
-          準決勝: 6,
-          準々決勝: 7,
-          出場: 8,
+          "準決勝": 6,
+          "準々決勝": 7,
+          "出場": 8,
         };
 
         return (
@@ -129,7 +130,7 @@ export default function Home() {
   }, [search, sort]);
 
   return (
-    <main className="min-h-screen overflow-visible bg-gradient-to-br from-violet-50 via-white to-pink-50 text-zinc-800">
+    <main className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-pink-50 text-zinc-800">
       <header className="sticky top-0 z-10 border-b border-white/80 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="group">
@@ -265,137 +266,271 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {filteredPlayers.map((player) => (
-              <Link
-                key={player.id}
-                href={`/players/${player.id}`}
-                className="group overflow-visible rounded-[2rem] border border-white bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-100/70"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-black text-zinc-900 transition group-hover:text-violet-600">
-                      {player.name}
-                    </h3>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredPlayers.map((player, index) => {
+              const appearances = Object.keys(
+                player.tournaments
+              ).length;
 
-                    {player.twitter && (
-                      <p className="mt-1 text-sm font-medium text-zinc-400">
+              const accentClasses = [
+                "from-violet-400 to-purple-400",
+                "from-pink-400 to-rose-400",
+                "from-sky-400 to-cyan-400",
+                "from-yellow-400 to-orange-400",
+              ];
+
+              const accent =
+                accentClasses[index % accentClasses.length];
+
+              return (
+                <Link
+                  key={player.id}
+                  href={`/players/${player.id}`}
+                  className="group relative overflow-visible rounded-[1.75rem] border border-white bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-100"
+                >
+                  <div
+                    className={`absolute left-0 top-0 h-1.5 w-full rounded-t-[1.75rem] bg-gradient-to-r ${accent}`}
+                  />
+
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="truncate text-xl font-black text-zinc-900 transition group-hover:text-violet-600">
+                        {player.name}
+                      </h3>
+
+                      <p className="mt-1 truncate text-sm font-medium text-zinc-400">
                         {player.twitter}
                       </p>
-                    )}
+                    </div>
+
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-50 text-lg font-bold text-violet-500 transition group-hover:bg-violet-100">
+                      →
+                    </span>
                   </div>
 
-                  <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-black text-violet-500">
-                    詳細 →
-                  </span>
-                </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <span className="rounded-full bg-violet-50 px-3 py-1.5 text-xs font-black text-violet-600">
+                      {appearances}大会出場
+                    </span>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-zinc-100 px-3 py-1.5 text-xs font-bold text-zinc-600">
-                    {Object.keys(player.tournaments).length}大会出場
-                  </span>
+                    <span className="rounded-full bg-pink-50 px-3 py-1.5 text-xs font-black text-pink-600">
+                      最高 {player.result}
+                    </span>
+                  </div>
 
-                  <span className="rounded-full bg-zinc-100 px-3 py-1.5 text-xs font-bold text-zinc-600">
-                    最高 {player.result}
-                  </span>
-                </div>
+                  {player.achievements &&
+                    player.achievements.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {player.achievements.map((achievement) => {
+                          const isWin =
+                            achievement === "個人優勝" ||
+                            achievement === "ダブルス優勝" ||
+                            achievement === "チーム優勝";
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {tournamentOrder.map((tournamentId) => {
-                    if (!player.tournaments[tournamentId]) {
-                      return null;
-                    }
+                          const isThird =
+                            achievement === "個人3位";
 
-                    const tournament = getTournamentById(tournamentId);
+                          const isRunnerUp =
+                            achievement === "個人準優勝" ||
+                            achievement === "ダブルス準優勝" ||
+                            achievement === "チーム準優勝";
 
-                    if (!tournament) {
-                      return null;
-                    }
+                          const isFourth =
+                            achievement === "個人4位";
 
-                    const individualResult = tournament.results?.find(
-                      (result) =>
-                        result.players.includes(player.name) ||
-                        player.aliases?.some((alias) =>
-                          result.players.includes(alias)
-                        )
-                    );
+                          const isFifth =
+                            achievement === "個人5位";
 
-                    const doublesResult = tournament.doublesResults?.find(
-                      (result) =>
-                        result.team.includes(player.name) ||
-                        player.aliases?.some((alias) =>
-                          result.team.includes(alias)
-                        )
-                    );
+                          const isSemifinal =
+                            achievement === "準決勝進出";
 
-                    const rank =
-                      individualResult?.rank ??
-                      doublesResult?.rank ??
-                      "出場";
+                          const isQuarterfinal =
+                            achievement === "準々決勝進出";
 
-                    const resultStyle = getResultStyle(rank);
+                          return (
+                            <span
+                              key={achievement}
+                              className={`rounded-full px-3 py-1.5 text-xs font-black ${
+                                isWin
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : isThird
+                                    ? "bg-orange-100 text-orange-700"
+                                    : isRunnerUp
+                                      ? "bg-zinc-200 text-zinc-700"
+                                      : isFourth
+                                        ? "bg-red-100 text-red-600"
+                                        : isFifth
+                                          ? "bg-rose-100 text-rose-600"
+                                          : isSemifinal
+                                            ? "bg-blue-100 text-blue-700"
+                                            : isQuarterfinal
+                                              ? "bg-violet-100 text-violet-700"
+                                              : "bg-zinc-100 text-zinc-500"
+                              }`}
+                            >
+                              {isWin
+                                ? "🏆"
+                                : isThird
+                                  ? "🥉"
+                                  : isRunnerUp
+                                    ? "🥈"
+                                    : isFourth
+                                      ? "4️⃣"
+                                      : isFifth
+                                        ? "5️⃣"
+                                        : isSemifinal
+                                          ? "🔵"
+                                          : isQuarterfinal
+                                            ? "🟣"
+                                            : "•"}{" "}
+                              {achievement}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
 
-                    return (
-                      <span
-                        key={tournamentId}
-                        className="relative"
-                      >
-                        <span
-                          className={`inline-flex rounded-full px-3 py-1.5 text-xs font-black transition group-hover:scale-105 ${resultStyle.className}`}
-                        >
-                          {resultStyle.icon}{" "}
-                          {tournamentShortNames[tournamentId] ??
-                            tournamentNames[tournamentId] ??
-                            tournamentId}
-                        </span>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {tournamentOrder
+                      .filter(
+                        (key) => player.tournaments[key]
+                      )
+                      .map((key) => {
+                        const tournament =
+                          getTournamentById(key);
 
-                        <span className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-3 hidden w-80 -translate-x-1/2 rounded-2xl bg-zinc-900 p-4 text-left text-xs text-white shadow-2xl group-hover:block">
-                          <span className="block font-black text-white">
-                            {tournament.name}
-                          </span>
+                        if (!tournament) {
+                          return null;
+                        }
 
-                          <span className="mt-1 block text-zinc-300">
-                            {tournament.date} / {tournament.category}
-                          </span>
+                        const individualResult =
+                          tournament.results?.find((result) =>
+                            result.players.some(
+                              (playerName) =>
+                                player.name === playerName ||
+                                player.aliases?.includes(
+                                  playerName
+                                )
+                            )
+                          );
 
-                          <span className="mt-3 block space-y-1">
-                            <span className="block">
-                              個人戦:{" "}
-                              {individualResult?.rank ?? "出場"}
+                        const doublesResult =
+                          tournament.doublesResults?.find(
+                            (result) =>
+                              result.team.some(
+                                (playerName) =>
+                                  player.name === playerName ||
+                                  player.aliases?.includes(
+                                    playerName
+                                  )
+                              )
+                          );
+
+                        const rank =
+                          individualResult?.rank ??
+                          doublesResult?.rank ??
+                          "出場";
+
+                        const resultStyle =
+                          getResultStyle(rank);
+
+                        return (
+                          <div
+                            key={key}
+                            className="group/tournament relative"
+                          >
+                            <span
+                              className={`inline-flex cursor-help items-center gap-1 rounded-full px-3 py-1.5 text-xs font-black transition hover:scale-105 ${resultStyle.className}`}
+                            >
+                              {resultStyle.icon}{" "}
+                              {tournamentShortNames[key] ??
+                                tournamentNames[key] ??
+                                key}
                             </span>
 
-                            {doublesResult && (
-                              <span className="block">
-                                ダブルス: {doublesResult.rank}
-                              </span>
-                            )}
-                          </span>
+                            <div className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-3 w-80 max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 rounded-2xl border border-zinc-100 bg-white p-4 text-left opacity-0 shadow-2xl transition-all duration-150 group-hover/tournament:translate-y-0 group-hover/tournament:opacity-100">
+                              <div className="mb-2">
+                                <p className="text-sm font-black text-zinc-900">
+                                  {tournament.name}
+                                </p>
 
-                          <span className="mt-3 block leading-5 text-zinc-300">
-                            {tournament.description}
-                          </span>
-                        </span>
-                      </span>
-                    );
-                  })}
-                </div>
-              </Link>
-            ))}
+                                <p className="mt-1 text-xs font-medium text-zinc-400">
+                                  {tournament.date} ・{" "}
+                                  {tournament.category}
+                                </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                {individualResult && (
+                                  <div
+                                    className={`rounded-xl px-3 py-2 text-xs font-bold ${resultStyle.className}`}
+                                  >
+                                    <span>
+                                      {resultStyle.icon} 個人成績
+                                    </span>
+
+                                    <span className="ml-2">
+                                      {individualResult.rank}
+                                    </span>
+                                  </div>
+                                )}
+
+                                {doublesResult && (
+                                  <div className="rounded-xl bg-pink-50 px-3 py-2 text-xs font-bold text-pink-700">
+                                    <div>
+                                      🤝 ダブルス
+                                      <span className="ml-2">
+                                        {doublesResult.rank}
+                                      </span>
+                                    </div>
+
+                                    <div className="mt-1 font-medium text-pink-500">
+                                      {doublesResult.team.join(
+                                        " / "
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+
+                                <p className="border-t border-zinc-100 pt-2 text-xs leading-5 text-zinc-500">
+                                  {tournament.description}
+                                </p>
+                              </div>
+
+                              <div className="mt-3 text-center text-[10px] font-bold text-zinc-300">
+                                選手詳細ページで大会の詳細を確認できます
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           {filteredPlayers.length === 0 && (
-            <div className="rounded-3xl border border-dashed border-violet-200 bg-white p-10 text-center">
-              <p className="text-lg font-black text-zinc-700">
-                該当する選手がいません
+            <div className="rounded-3xl border border-white bg-white p-10 text-center shadow-sm">
+              <div className="text-4xl">🔎</div>
+
+              <p className="mt-3 font-bold text-zinc-700">
+                該当する選手が見つかりません。
               </p>
 
-              <p className="mt-2 text-sm text-zinc-400">
+              <p className="mt-1 text-sm text-zinc-400">
                 選手名やXアカウントを確認してください。
               </p>
             </div>
           )}
         </section>
       </div>
+
+      <footer className="px-6 py-10 text-center">
+        <p className="text-xs font-bold tracking-widest text-zinc-400">
+          PROJECT SEKAI PLAYER DATABASE
+        </p>
+      </footer>
     </main>
   );
 }
