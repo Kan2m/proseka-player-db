@@ -510,7 +510,7 @@ export const tournaments: Tournament[] = [
     },
     {
       rank: "準優勝",
-      players: ["Koma"],
+      players: ["Koma."],
     },
     {
       rank: "3位",
