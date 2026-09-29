@@ -621,6 +621,7 @@ export const players: Player[] = [
     twitter: "@10krtn",
     appearances: 2,
     result: "準優勝",
+     aliases: ["な～の"],
     achievements: [
     "チーム準優勝",
     "準決勝進出"
@@ -914,6 +915,7 @@ export const players: Player[] = [
     id: "exnc",
     name: "ヱ*XnC",
     twitter: "@ErinNnG_X",
+    aliases: ["ヱ"],
     appearances: 2,
     result: "準々決勝",
     achievements: [
