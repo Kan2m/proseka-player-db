@@ -1207,6 +1207,9 @@ export const players: Player[] = [
   appearances: 1,
   result: "準々決勝進出",
   notes: "「ほわいと杯」のほわいととは別人。配信者であったが引退済み。元気です。",
+  achievements: [
+    "準々決勝進出"
+  ],
   tournaments: {
     white2025: true,
   },
