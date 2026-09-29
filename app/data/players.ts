@@ -1200,6 +1200,17 @@ export const players: Player[] = [
     white2026: true,
   },
 },
+{
+  id: "howaito",
+  name: "ほわいと",
+  twitter:"@White_deemo",
+  appearances: 1,
+  result: "準々決勝進出",
+  notes: "「ほわいと杯」のほわいととは別人。配信者であったが引退済み。元気です。",
+  tournaments: {
+    white2025: true,
+  },
+},
 ];
 
 export function getPlayerById(id: string) {
