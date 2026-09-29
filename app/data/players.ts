@@ -1840,10 +1840,10 @@ export const players: Player[] = [
 },
 
 {
-  id: "inf",
-  name: "INF",
+  id: "inf.",
+  name: "INF.",
   twitter: "",
-  aliases: ["INF"],
+  aliases: ["INF."],
   appearances: 3,
   result: "準決勝",
   notes: "WCS2024では韓国語版で予選突破。",
@@ -1853,7 +1853,7 @@ export const players: Player[] = [
   tournaments: {
     wcs24: true,
     cs24A: true,
-    cs25: true,
+    cs25: true
   },
 },
 
