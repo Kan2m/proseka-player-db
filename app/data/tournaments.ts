@@ -127,7 +127,7 @@ export const tournaments: Tournament[] = [
   id: "cs22S",
   name: "プロセカChampionship 2022 Spring",
   date: "2022年",
-  category: "個人戦",
+  category: "チーム戦",
   description:
     "プロセカ初のチーム戦、BAN PICK方式も初採用。決勝初見曲は「脳漿炸裂ガール」。",
   results: [
@@ -181,7 +181,7 @@ export const tournaments: Tournament[] = [
   id: "cs22A",
   name: "プロセカChampionship 2022 Autumn",
   date: "2022年",
-  category: "個人戦",
+  category: "チーム戦",
   description:
     "2度目のチーム戦。決勝初見曲は「腐れ外道とチョコレゐト」。",
   results: [
@@ -502,7 +502,7 @@ export const tournaments: Tournament[] = [
   date: "2025年",
   category: "個人戦・ダブルス",
   description:
-    "ほわいと杯2025 OFFLINE。",
+    "初の大型オフライン大会。個人戦とダブルス部門の2部門で開催。",
   results: [
     {
       rank: "優勝",
@@ -568,7 +568,7 @@ export const tournaments: Tournament[] = [
   date: "2026年",
   category: "個人戦・ダブルス",
   description:
-    "ほわいと杯2026 OFFLINE。",
+    "2回目の非公式大型オフライン大会。個人戦とダブルス部門の2部門で開催。",
   results: [
     { rank: "優勝", players: ["kaya"] },
     { rank: "準優勝", players: ["Koma."] },
