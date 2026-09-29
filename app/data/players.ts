@@ -195,6 +195,7 @@ export const players: Player[] = [
     twitter: "@RIALEYMX",
     appearances: 5,
     result: "準決勝",
+    aliases: ["り"],
     achievements: [
     "準決勝進出",
   ],
@@ -470,6 +471,7 @@ export const players: Player[] = [
       cs25: true,
       cs26: true,
       white2025: true,
+      white2026: true,
     },
     notes: "ほわいと杯2025 ダブルス部門で優勝 / 過去に「カルボナーラ24時」名義で出場",
   },
@@ -900,6 +902,7 @@ export const players: Player[] = [
     id: "sakamochamocha",
     name: "さかもちゃもちゃ！",
     twitter: "@sakamocya_mocya",
+    aliases: ["ピジャも"],
     appearances: 2,
     result: "準々決勝",
     achievements: [
@@ -1214,6 +1217,842 @@ export const players: Player[] = [
   ],
   tournaments: {
     white2025: true,
+     },
+  },
+  {
+  id: "ri",
+  name: "り",
+  twitter: "",
+  aliases: ["り"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "okitotori",
+  name: "おきとり",
+  twitter: "",
+  aliases: ["おきとり"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "aoren",
+  name: "あおれん",
+  twitter: "",
+  aliases: ["あおれん"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "lewisi4",
+  name: "Lewisi4",
+  twitter: "",
+  aliases: ["Lewisi4"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "774",
+  name: "774",
+  twitter: "",
+  aliases: ["774"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "goroo",
+  name: "ごろ〜",
+  twitter: "",
+  aliases: ["ごろ〜"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "usaki",
+  name: "U咲",
+  twitter: "",
+  aliases: ["U咲"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "alpha-bimi",
+  name: "α*Bimi",
+  twitter: "",
+  aliases: ["α*Bimi"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "koppe",
+  name: "こっぺ",
+  twitter: "",
+  aliases: ["こっぺ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "eons",
+  name: "Eons",
+  twitter: "",
+  aliases: ["Eons"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+},
+
+{
+  id: "ikacchi",
+  name: "イカっち",
+  twitter: "",
+  aliases: ["イカっち"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    RAGE: true,
+  },
+  },
+{
+  id: "midotsuki",
+  name: "みどつき",
+  twitter: "",
+  aliases: ["みどつき"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "ruin",
+  name: "ruin",
+  twitter: "",
+  aliases: ["ruin"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+  },
+{
+  id: "hika",
+  name: "ひか",
+  twitter: "",
+  aliases: ["ひか"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "f-shina",
+  name: "F.紫菜",
+  twitter: "",
+  aliases: ["F.紫菜"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "urabe",
+  name: "うらべ",
+  twitter: "",
+  aliases: ["うらべ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "poko-218",
+  name: "poko_218",
+  twitter: "",
+  aliases: ["poko_218"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "yatogami",
+  name: "やとがみ",
+  twitter: "",
+  aliases: ["やとがみ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "wak",
+  name: "wak",
+  twitter: "",
+  aliases: ["wak"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "inumata",
+  name: "いぬまた",
+  twitter: "",
+  aliases: ["いぬまた"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "shirasu",
+  name: "しらす",
+  twitter: "",
+  aliases: ["しらす"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+},
+
+{
+  id: "chuto-hanpa",
+  name: "中途半端",
+  twitter: "",
+  aliases: ["中途半端"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+  },
+{
+  id: "mita-kosuke",
+  name: "三田皓介",
+  twitter: "",
+  aliases: ["三田皓介"],
+  appearances: 1,
+  result: "準優勝",
+  achievements: [
+    "個人準優勝"
+  ],
+  tournaments: {
+    cs21A: true,
+  },
+  },
+{
+  id: "age",
+  name: "アージュ",
+  twitter: "",
+  aliases: ["アージュ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22S: true,
+  },
+},
+
+{
+  id: "warren",
+  name: "warren",
+  twitter: "",
+  aliases: ["warren"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22S: true,
+  },
+},
+
+{
+  id: "hita",
+  name: "ひた",
+  twitter: "",
+  aliases: ["ひた"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22S: true,
+  },
+  },
+{
+  id: "neko",
+  name: "ねこ",
+  twitter: "",
+  aliases: ["ねこ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22A: true,
+  },
+},
+
+{
+  id: "kamome",
+  name: "かもめ",
+  twitter: "",
+  aliases: ["かもめ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22A: true,
+  },
+},
+
+{
+  id: "michirumama",
+  name: "みちるまま",
+  twitter: "",
+  aliases: ["みちるまま"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    cs22A: true,
+  },
+  },
+{
+  id: "neronene",
+  name: "NERONENE",
+  twitter: "",
+  aliases: ["NERONENE"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "mitsuue",
+  name: "みつうえ",
+  twitter: "",
+  aliases: ["みつうえ"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "sugaku",
+  name: "数学",
+  twitter: "",
+  aliases: ["数学"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "5",
+  name: "5",
+  twitter: "",
+  aliases: ["5"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "miso",
+  name: "みそ",
+  twitter: "",
+  aliases: ["みそ"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "yukine",
+  name: "ゆきーね",
+  twitter: "",
+  aliases: ["ゆきーね"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+  },
+{
+  id: "dgct",
+  name: "DGCT",
+  twitter: "",
+  aliases: ["DGCT"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "ichigomilk",
+  name: "いちごみるく",
+  twitter: "",
+  aliases: ["いちごみるく"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "arui",
+  name: "あるい",
+  twitter: "",
+  aliases: ["あるい"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+
+{
+  id: "biru",
+  name: "びる",
+  twitter: "",
+  aliases: ["びる"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+  },
+{
+  id: "furandachu",
+  name: "ふー乱打中",
+  twitter: "",
+  aliases: ["ふー乱打中"],
+  appearances: 1,
+  result: "3位",
+  achievements: [
+    "個人3位"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+},
+{
+  id: "nexusdg",
+  name: "nexusDG",
+  twitter: "",
+  aliases: ["nexusDG"],
+  appearances: 1,
+  result: "準決勝",
+  notes: "WCS2024では繁体字版で予選突破。",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "echo",
+  name: "Echo",
+  twitter: "",
+  aliases: ["Echo"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では英語版(グローバル版)で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "inf",
+  name: "INF",
+  twitter: "",
+  aliases: ["INF"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では韓国語版で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+    cs24A: true,
+  },
+},
+
+{
+  id: "ci",
+  name: "ci",
+  twitter: "",
+  aliases: ["ci"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では繁体字版で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "alfy",
+  name: "alfy",
+  twitter: "",
+  aliases: ["alfy"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では英語版(グローバル版)で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "hyoukai",
+  name: "氷塊",
+  twitter: "",
+  aliases: ["氷塊"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では繁体字版で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "niconi",
+  name: "nico2/にこにー",
+  twitter: "",
+  aliases: ["nico2/にこにー"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "rein",
+  name: "rein",
+  twitter: "",
+  aliases: ["rein"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では繁体字版で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "aplo",
+  name: "aplo",
+  twitter: "",
+  aliases: ["aplo"],
+  appearances: 1,
+  result: "準々決勝",
+  notes: "WCS2024では英語版(グローバル版)で予選突破。",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+},
+
+{
+  id: "nokonoko",
+  name: "のこのこ",
+  twitter: "",
+  aliases: ["のこのこ"],
+  appearances: 1,
+  result: "準々決勝",
+  achievements: [
+    "準々決勝進出"
+  ],
+  tournaments: {
+    wcs24: true,
+  },
+   },
+  {
+  id: "kyofu-no-hiratake",
+  name: "恐怖のヒラタケ",
+  twitter: "",
+  aliases: ["恐怖のヒラタケ"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
+  },
+},
+
+{
+  id: "005saikou",
+  name: "005saikou",
+  twitter: "",
+  aliases: ["005saikou"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
+  },
+},
+  {
+  id: "kyofu-no-hiratake",
+  name: "恐怖のヒラタケ",
+  twitter: "",
+  aliases: ["恐怖のヒラタケ"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
+  },
+},
+
+{
+  id: "005saikou",
+  name: "005saikou",
+  twitter: "",
+  aliases: ["005saikou"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
+  },
+},
+  {
+  id: "kyofu-no-hiratake",
+  name: "恐怖のヒラタケ",
+  twitter: "",
+  aliases: ["恐怖のヒラタケ"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
+  },
+},
+
+{
+  id: "005saikou",
+  name: "005saikou",
+  twitter: "",
+  aliases: ["005saikou"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs24A: true,
   },
 },
 ];
