@@ -1796,6 +1796,20 @@ export const players: Player[] = [
     cs23S: true,
   },
   },
+  {
+  id: "san",
+  name: "3",
+  twitter: "",
+  aliases: ["3"],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs23S: true,
+  },
+  },
 {
   id: "furandachu",
   name: "ふー乱打中",
