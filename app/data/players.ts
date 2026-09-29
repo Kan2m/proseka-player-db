@@ -1981,8 +1981,7 @@ export const players: Player[] = [
   tournaments: {
     cs24A: true,
   },
-},
-
+  },
 {
   id: "005saikou",
   name: "005saikou",
@@ -1996,65 +1995,7 @@ export const players: Player[] = [
   tournaments: {
     cs24A: true,
   },
-},
-  {
-  id: "kyofu-no-hiratake",
-  name: "恐怖のヒラタケ",
-  twitter: "",
-  aliases: ["恐怖のヒラタケ"],
-  appearances: 1,
-  result: "準決勝",
-  achievements: [
-    "準決勝進出"
-  ],
-  tournaments: {
-    cs24A: true,
   },
-},
-
-{
-  id: "005saikou",
-  name: "005saikou",
-  twitter: "",
-  aliases: ["005saikou"],
-  appearances: 1,
-  result: "準決勝",
-  achievements: [
-    "準決勝進出"
-  ],
-  tournaments: {
-    cs24A: true,
-  },
-},
-  {
-  id: "kyofu-no-hiratake",
-  name: "恐怖のヒラタケ",
-  twitter: "",
-  aliases: ["恐怖のヒラタケ"],
-  appearances: 1,
-  result: "準決勝",
-  achievements: [
-    "準決勝進出"
-  ],
-  tournaments: {
-    cs24A: true,
-  },
-},
-
-{
-  id: "005saikou",
-  name: "005saikou",
-  twitter: "",
-  aliases: ["005saikou"],
-  appearances: 1,
-  result: "準決勝",
-  achievements: [
-    "準決勝進出"
-  ],
-  tournaments: {
-    cs24A: true,
-  },
-},
 ];
 
 export function getPlayerById(id: string) {
