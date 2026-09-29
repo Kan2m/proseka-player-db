@@ -681,7 +681,7 @@ export const players: Player[] = [
       RAGE: true,
       cs21A: true,
     },
-    notes: "過去に「な〜の」名義で出場",
+    notes: "過去に「な～の」名義で出場",
   },
   {
     id: "tsukishiro",
