@@ -427,21 +427,6 @@ export const players: Player[] = [
     notes: "2022CS Autumn チーム「QAP部」にて準優勝"
   },
   {
-    id: "inf",
-    name: "INF.",
-    twitter: "@INF_794",
-    appearances: 3,
-    result: "準決勝",
-    achievements: [
-    "準決勝進出",
-  ],
-    tournaments: {
-      wcs24: true,
-      cs24A: true,
-      cs25: true,
-    },
-  },
-  {
     id: "fushoku",
     name: "腐食",
     twitter: "@MaengZombie",
@@ -1925,7 +1910,7 @@ export const players: Player[] = [
   id: "niconi",
   name: "nico2/にこにー",
   twitter: "",
-  aliases: ["nico2/にこにー"],
+  aliases: ["にこにー"],
   appearances: 1,
   result: "準々決勝",
   achievements: [
