@@ -1847,10 +1847,10 @@ export const players: Player[] = [
   twitter: "",
   aliases: ["INF"],
   appearances: 1,
-  result: "準々決勝",
+  result: "準決勝",
   notes: "WCS2024では韓国語版で予選突破。",
   achievements: [
-    "準々決勝進出"
+    "準決勝進出"
   ],
   tournaments: {
     wcs24: true,
