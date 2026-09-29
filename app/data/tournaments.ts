@@ -43,7 +43,7 @@ export const tournaments: Tournament[] = [
         "り",
         "がう。",
         "ひなた",
-        "な〜の",
+        "な～の",
         "ろら",
         "おきとり",
         "みーのくん",
@@ -334,7 +334,7 @@ export const tournaments: Tournament[] = [
       players: ["Eff"],
       },
     {
-      rank: "準々決勝進出",
+      rank: "準決勝進出",
       players: [
         "temp",
         "ななせ",
@@ -347,11 +347,6 @@ export const tournaments: Tournament[] = [
 
       rank: "準々決勝進出",
       players: [
-        "temp",
-        "ななせ",
-        "リリィ",
-        "REN",
-        "nexusDG",
         "Echo",
         "きらにゃん",
         "初心者",

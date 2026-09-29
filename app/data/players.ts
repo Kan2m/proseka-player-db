@@ -147,7 +147,6 @@ export const players: Player[] = [
       cs24A: true,
       cs25: true,
       cs26: true,
-      white2025: true,
       white2026: true,
     },
     notes: "唯一の個人戦二連覇(2024CS 2025CS) 2023CSはU-12部門出場。過去に「まろやかれおちゃ♪」「デーモンコアくん」名義で出場 / 第2回APマラソンで優勝",
