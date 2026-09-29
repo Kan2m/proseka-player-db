@@ -103,6 +103,7 @@ export const players: Player[] = [
       cs22A: true,
       cs23S: true,
       wcs24: true,
+      white2026: true,
     },
     notes: "RAGE2020で準優勝 / WCS2024で3位"
   },
@@ -223,6 +224,7 @@ export const players: Player[] = [
       cs23S: true,
       wcs24: true,
       cs24A: true,
+      white2025: true,
     },
     notes: "WCS2024で優勝",
   },
@@ -1191,6 +1193,9 @@ export const players: Player[] = [
   appearances: 1,
   result: "準決勝進出",
   notes: "ランクマッチ10000粒達成で一位。",
+  achievements: [
+    "準決勝進出"
+  ],
   tournaments: {
     white2026: true,
   },
