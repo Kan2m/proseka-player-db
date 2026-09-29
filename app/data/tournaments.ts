@@ -300,6 +300,7 @@ export const tournaments: Tournament[] = [
         "いちごみるく",
         "あるい",
         "びる",
+        "3",
       ],
     },
   ],
@@ -331,9 +332,20 @@ export const tournaments: Tournament[] = [
     {
       rank: "5位",
       players: ["Eff"],
-    },
+      },
     {
-      rank: "準決勝進出",
+      rank: "準々決勝進出",
+      players: [
+        "temp",
+        "ななせ",
+        "リリィ",
+        "REN",
+        "nexusDG",
+         ],
+       },
+    {
+
+      rank: "準々決勝進出",
       players: [
         "temp",
         "ななせ",
