@@ -510,15 +510,15 @@ export const tournaments: Tournament[] = [
     },
     {
       rank: "準優勝",
-      players: ["かん"],
-    },
-    {
-      rank: "3位",
       players: ["Koma"],
     },
     {
-      rank: "4位",
+      rank: "3位",
       players: ["ykt"],
+    },
+    {
+      rank: "4位",
+      players: ["かん"],
     },
     {
       rank: "準決勝進出",
