@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ### 取得する情報(最小限)
 
-- X に要求する権限は `users.read` のみ(投稿・メールアドレス・長期トークンは要求しない)
+- X に要求する権限は `tweet.read` と `users.read` のみ(`/2/users/me` の必須権限。投稿・メールアドレス・長期トークンは要求しない)
 - 取得・保存するのは X の **内部ID とユーザー名** だけ
 - X のアクセストークンは本人確認直後に無効化し、保存しない
 - ログイン状態は署名付き httpOnly Cookie(内部ID・ユーザー名・有効期限のみ)

@@ -9,15 +9,21 @@ import {
 } from "../../../lib/session";
 
 // 本人確認(GET /2/users/me)に必要な最小限の権限だけを要求する。
-// X には「自分の情報だけ」を読む権限がないため users.read が最小。
-// トークンは自分の情報を1回取得したら即無効化するので、他アカウントの閲覧には使わない。
+// X の仕様上 /2/users/me は tweet.read と users.read の両方が必須
+// (users.read だけだと 403 になりログインに失敗する)。
+// トークンは自分の情報を1回取得したら即無効化するので、投稿の閲覧等には使わない。
 // (投稿・メールアドレス・長期トークン(offline.access)は要求しない)
-const SCOPES = ["users.read"];
+const SCOPES = ["tweet.read", "users.read"];
 
 export async function GET(request: NextRequest) {
   const clientId = process.env.X_CLIENT_ID;
 
-  if (!clientId) {
+  // SESSION_SECRET が無いと Cookie の署名で例外になり 500 になるため、ここで弾く
+  if (
+    !clientId ||
+    !process.env.X_CLIENT_SECRET ||
+    (process.env.SESSION_SECRET?.length ?? 0) < 32
+  ) {
     return NextResponse.redirect(new URL("/login?error=config", request.url));
   }
 
