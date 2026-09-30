@@ -83,7 +83,10 @@ export default async function MyPage() {
   }
 
   const supabase = createAdminClient();
-  const [{ data: profile }, { data: requests }] = await Promise.all([
+  const [
+    { data: profile, error: profileError },
+    { data: requests, error: requestsError },
+  ] = await Promise.all([
     supabase
       .from("player_profiles")
       .select("bio, avatar_path")
@@ -95,6 +98,15 @@ export default async function MyPage() {
       .eq("player_id", player.id)
       .order("created_at", { ascending: false }),
   ]);
+
+  // 読み込みに失敗すると自己紹介が空欄に見えるので、原因をログに残す
+  if (profileError) {
+    console.error("[mypage] profile load failed:", profileError);
+  }
+
+  if (requestsError) {
+    console.error("[mypage] youtube requests load failed:", requestsError);
+  }
 
   const youtubeRequests = (requests ?? []) as YoutubeRequest[];
   const avatarUrl = avatarPublicUrl(

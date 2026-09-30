@@ -55,6 +55,7 @@ export async function updateBio(
     });
 
   if (error) {
+    console.error("[mypage] bio save failed:", error);
     return { ok: false, message: "保存に失敗しました。" };
   }
 
@@ -87,6 +88,7 @@ export async function requestYoutubeChannel(
     .in("status", ["pending", "approved"]);
 
   if (selectError) {
+    console.error("[mypage] youtube select failed:", selectError);
     return { ok: false, message: "申請に失敗しました。" };
   }
 
@@ -108,6 +110,7 @@ export async function requestYoutubeChannel(
   });
 
   if (error) {
+    console.error("[mypage] youtube request failed:", error);
     return { ok: false, message: "申請に失敗しました。" };
   }
 
@@ -218,6 +221,7 @@ export async function updateAvatar(
   });
 
   if (error) {
+    console.error("[mypage] avatar save failed:", error);
     await supabase.storage.from(AVATAR_BUCKET).remove([path]);
     return { ok: false, message: "保存に失敗しました。" };
   }

@@ -34,6 +34,19 @@ create table if not exists public.youtube_requests (
   reviewed_at timestamptz
 );
 
+-- 旧スキーマ(Supabase Auth 時代)からの移行。
+-- 当初は updated_by / requested_by が auth.users を参照する uuid 列だったが、
+-- 今は X の内部ID(数字の文字列)を入れるため text にする。
+-- create table if not exists は既存テーブルを変更しないので、ここで明示的に変更する(再実行しても問題ない)
+alter table public.player_profiles
+  drop constraint if exists player_profiles_updated_by_fkey;
+alter table public.player_profiles
+  alter column updated_by type text using updated_by::text;
+alter table public.youtube_requests
+  drop constraint if exists youtube_requests_requested_by_fkey;
+alter table public.youtube_requests
+  alter column requested_by type text using requested_by::text;
+
 create index if not exists youtube_requests_player_id_idx
   on public.youtube_requests (player_id);
 create index if not exists youtube_requests_status_idx

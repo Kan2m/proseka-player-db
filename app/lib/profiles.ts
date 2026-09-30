@@ -50,6 +50,13 @@ export async function getPublicProfile(playerId: string) {
       .order("reviewed_at", { ascending: true }),
   ]);
 
+  if (profileResult.error || youtubeResult.error) {
+    console.error(
+      "[profiles] public profile load failed:",
+      profileResult.error ?? youtubeResult.error
+    );
+  }
+
   return {
     bio: (profileResult.data?.bio as string | undefined) ?? "",
     avatarUrl: avatarPublicUrl(
@@ -65,10 +72,14 @@ export async function getAvatarUrls(): Promise<Record<string, string>> {
     return {};
   }
 
-  const { data } = await createPublicClient()
+  const { data, error } = await createPublicClient()
     .from("player_profiles")
     .select("player_id, avatar_path")
     .not("avatar_path", "is", null);
+
+  if (error) {
+    console.error("[profiles] avatar list load failed:", error);
+  }
 
   return Object.fromEntries(
     (data ?? []).flatMap((row) => {
