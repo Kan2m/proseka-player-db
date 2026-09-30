@@ -39,6 +39,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   ブラウザで中央を正方形に切り抜き 256px に縮小してから Supabase Storage(`avatars` バケット)に保存する。
   未設定の場合は人のシルエットを表示する
 
+### ローカルでの検証(Docker Desktop が必要)
+
+1. `npx supabase start` でローカルの Supabase を起動(表示される URL・キーを `.env.local` に設定)
+2. `supabase/schema.sql` をローカルの DB(`postgresql://postgres:postgres@127.0.0.1:54322/postgres`)で実行。
+   Studio(http://127.0.0.1:54323)の SQL Editor からでもよい
+3. `.env.local` に `DEV_LOGIN=1` を設定して `npm run dev`
+4. http://localhost:3000/auth/dev-login?handle=_Kan2M のように開くと、X を通さずその選手としてログインできる
+5. 終わったら `npx supabase stop`
+
 ## Getting Started
 
 First, run the development server:
