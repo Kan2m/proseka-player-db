@@ -85,18 +85,38 @@ export default async function PlayerPage({ params }: PageProps) {
               {player.name}
             </h1>
 
-            {player.twitter && (
-              <a
-                href={`https://x.com/${player.twitter.replace(/^@/, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-800 transition hover:bg-zinc-200"
-              >
-                𝕏
-                <span className="font-medium text-zinc-500">
-                  {player.twitter}
-                </span>
-              </a>
+            {/* SNS(X と、選手本人が登録した YouTube を横並び) */}
+            {(player.twitter || profile.youtubeUrls.length > 0) && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {player.twitter && (
+                  <a
+                    href={`https://x.com/${player.twitter.replace(/^@/, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-800 transition hover:bg-zinc-200"
+                  >
+                    𝕏
+                    <span className="font-medium text-zinc-500">
+                      {player.twitter}
+                    </span>
+                  </a>
+                )}
+
+                {profile.youtubeUrls.map((url) => (
+                  <a
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-100"
+                  >
+                    ▶ YouTube
+                    <span className="font-medium text-red-400">
+                      {url.replace("https://www.youtube.com/", "")}
+                    </span>
+                  </a>
+                ))}
+              </div>
             )}
 
             <div className="mt-8 grid grid-cols-2 gap-4 md:max-w-xl">
@@ -122,8 +142,8 @@ export default async function PlayerPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 自己紹介・YouTube(選手本人がマイページで設定) */}
-        {(profile.bio || profile.youtubeUrls.length > 0) && (
+        {/* 自己紹介(選手本人がマイページで設定) */}
+        {profile.bio && (
           <section className="mt-10">
             <p className="text-sm font-bold tracking-[0.15em] text-violet-500">
               ABOUT
@@ -132,34 +152,9 @@ export default async function PlayerPage({ params }: PageProps) {
             <h2 className="mt-1 text-3xl font-black">自己紹介</h2>
 
             <div className="mt-5 rounded-[1.5rem] border border-white bg-white p-6 shadow-sm">
-              {profile.bio && (
-                <p className="whitespace-pre-wrap break-words leading-7 text-zinc-600">
-                  {profile.bio}
-                </p>
-              )}
-
-              {profile.youtubeUrls.length > 0 && (
-                <div
-                  className={`flex flex-wrap gap-2 ${
-                    profile.bio ? "mt-5 border-t border-zinc-100 pt-5" : ""
-                  }`}
-                >
-                  {profile.youtubeUrls.map((url) => (
-                    <a
-                      key={url}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-100"
-                    >
-                      ▶ YouTube
-                      <span className="font-medium text-red-400">
-                        {url.replace("https://www.youtube.com/", "")}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              )}
+              <p className="whitespace-pre-wrap break-words leading-7 text-zinc-600">
+                {profile.bio}
+              </p>
             </div>
           </section>
         )}
