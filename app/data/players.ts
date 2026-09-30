@@ -1370,7 +1370,7 @@ export const players: Player[] = [
 {
   id: "midotsuki",
   name: "みどつき",
-  twitter: "@GreMoooon_",
+  twitter: "@GReMoooon_",
   aliases: ["みどつき"],
   appearances: 1,
   result: "準決勝",
@@ -1409,6 +1409,20 @@ export const players: Player[] = [
   ],
   tournaments: {
     cs21A: true,
+  },
+},
+{
+  id: "kyaito",
+  name: "きゃいと",
+  twitter: "",
+  aliases: [""],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs22S: true,
   },
 },
 
