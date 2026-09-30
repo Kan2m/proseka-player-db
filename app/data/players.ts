@@ -1180,7 +1180,7 @@ export const players: Player[] = [
   twitter: "@Dearmyfortune_",
   appearances: 1,
   result: "準決勝進出",
-  notes: "ランクマッチ10000粒達成で一位。",
+  notes: "ランクマッチ12345粒達成で一位。",
   achievements: [
     "準決勝進出"
   ],
@@ -1694,10 +1694,11 @@ export const players: Player[] = [
 {
   id: "miso",
   name: "みそ",
-  twitter: "",
+  twitter: "@Honamizuki_",
   aliases: ["みそ"],
   appearances: 1,
   result: "準決勝",
+  notes: "トイレ軍らしい",
   achievements: [
     "準決勝進出"
   ],
@@ -1713,6 +1714,7 @@ export const players: Player[] = [
   aliases: ["ゆきーね"],
   appearances: 1,
   result: "準決勝",
+  
   achievements: [
     "準決勝進出"
   ],
