@@ -5,6 +5,7 @@ import {
   tournamentNames,
   tournamentOrder,
 } from "../../data/players";
+import PlayerAvatar from "../../components/PlayerAvatar";
 import { getPublicProfile } from "../../lib/profiles";
 import {
   getPlayerTournamentResult,
@@ -81,9 +82,17 @@ export default async function PlayerPage({ params }: PageProps) {
               PLAYER PROFILE
             </p>
 
-            <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
-              {player.name}
-            </h1>
+            <div className="mt-4 flex items-center gap-5">
+              <PlayerAvatar
+                src={profile.avatarUrl}
+                name={player.name}
+                className="h-20 w-20 rounded-3xl md:h-24 md:w-24"
+              />
+
+              <h1 className="min-w-0 break-words text-5xl font-black tracking-tight md:text-6xl">
+                {player.name}
+              </h1>
+            </div>
 
             {/* SNS(X と、選手本人が登録した YouTube を横並び) */}
             {(player.twitter || profile.youtubeUrls.length > 0) && (

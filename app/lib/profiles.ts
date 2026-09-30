@@ -4,6 +4,7 @@ import {
   createPublicClient,
   isSupabaseConfigured,
 } from "@/lib/supabase/server";
+import { avatarPublicUrl } from "./avatar";
 
 export type YoutubeRequest = {
   id: string;
@@ -23,10 +24,14 @@ export const statusLabels: Record<
   rejected: { label: "却下", className: "bg-zinc-200 text-zinc-600" },
 };
 
-// 選手ページに表示する公開情報(自己紹介・承認済みチャンネル)
+// 選手ページに表示する公開情報(自己紹介・アイコン・承認済みチャンネル)
 export async function getPublicProfile(playerId: string) {
   if (!isSupabaseConfigured) {
-    return { bio: "", youtubeUrls: [] as string[] };
+    return {
+      bio: "",
+      avatarUrl: null as string | null,
+      youtubeUrls: [] as string[],
+    };
   }
 
   const supabase = createPublicClient();
@@ -34,7 +39,7 @@ export async function getPublicProfile(playerId: string) {
   const [profileResult, youtubeResult] = await Promise.all([
     supabase
       .from("player_profiles")
-      .select("bio")
+      .select("bio, avatar_path")
       .eq("player_id", playerId)
       .maybeSingle(),
     supabase
@@ -47,8 +52,30 @@ export async function getPublicProfile(playerId: string) {
 
   return {
     bio: (profileResult.data?.bio as string | undefined) ?? "",
+    avatarUrl: avatarPublicUrl(
+      profileResult.data?.avatar_path as string | null | undefined
+    ),
     youtubeUrls: (youtubeResult.data ?? []).map((row) => row.url as string),
   };
+}
+
+// 選手一覧用: アイコンを設定している選手の { 選手ID: 画像URL }
+export async function getAvatarUrls(): Promise<Record<string, string>> {
+  if (!isSupabaseConfigured) {
+    return {};
+  }
+
+  const { data } = await createPublicClient()
+    .from("player_profiles")
+    .select("player_id, avatar_path")
+    .not("avatar_path", "is", null);
+
+  return Object.fromEntries(
+    (data ?? []).flatMap((row) => {
+      const url = avatarPublicUrl(row.avatar_path as string);
+      return url ? [[row.player_id as string, url]] : [];
+    })
+  );
 }
 
 // 受け付ける URL 例:

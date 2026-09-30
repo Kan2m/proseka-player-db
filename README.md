@@ -16,6 +16,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### 手順
 
 1. **Supabase プロジェクトを作成**し、SQL Editor で `supabase/schema.sql` を実行
+   (アイコン用の `avatars` バケットと `avatar_path` 列も作成される。既存の環境でも再実行して問題ない)
 2. **X Developer Console でアプリを設定**
    - ユーザー認証設定: 権限「読む」、種類「ウェブアプリ」、メール取得 OFF
    - Callback URI: `https://<本番ドメイン>/auth/x/callback` と `http://localhost:3000/auth/x/callback`
@@ -34,6 +35,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - 紐付けをやり直す場合は Supabase の `player_accounts` から該当行を削除する
 - `/admin`: `ADMIN_X_IDS` に含まれるアカウントだけが YouTube チャンネル申請を承認・却下できる
 - 選手ページには自己紹介と承認済みチャンネルだけが表示される
+- アイコンはマイページで設定でき、承認なしですぐに選手ページ・選手一覧に反映される。
+  ブラウザで中央を正方形に切り抜き 256px に縮小してから Supabase Storage(`avatars` バケット)に保存する。
+  未設定の場合は人のシルエットを表示する
 
 ## Getting Started
 

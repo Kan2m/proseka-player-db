@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/server";
+import PlayerAvatar from "../components/PlayerAvatar";
 import { getCurrentAccount } from "../lib/auth";
+import { avatarPublicUrl } from "../lib/avatar";
 import { statusLabels, type YoutubeRequest } from "../lib/profiles";
 import { deleteYoutubeChannel, logout } from "./actions";
+import AvatarForm from "./AvatarForm";
 import BioForm from "./BioForm";
 import YoutubeForm from "./YoutubeForm";
 
@@ -83,7 +86,7 @@ export default async function MyPage() {
   const [{ data: profile }, { data: requests }] = await Promise.all([
     supabase
       .from("player_profiles")
-      .select("bio")
+      .select("bio, avatar_path")
       .eq("player_id", player.id)
       .maybeSingle(),
     supabase
@@ -94,6 +97,9 @@ export default async function MyPage() {
   ]);
 
   const youtubeRequests = (requests ?? []) as YoutubeRequest[];
+  const avatarUrl = avatarPublicUrl(
+    profile?.avatar_path as string | null | undefined
+  );
 
   return (
     <PageShell>
@@ -101,14 +107,22 @@ export default async function MyPage() {
         <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-pink-200/40 blur-2xl" />
 
         <div className="relative flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-bold tracking-[0.2em] text-violet-500">
-              MY PAGE
-            </p>
+          <div className="flex items-center gap-5">
+            <PlayerAvatar
+              src={avatarUrl}
+              name={player.name}
+              className="h-20 w-20 rounded-3xl"
+            />
 
-            <h1 className="mt-3 text-4xl font-black">{player.name}</h1>
+            <div>
+              <p className="text-sm font-bold tracking-[0.2em] text-violet-500">
+                MY PAGE
+              </p>
 
-            <p className="mt-2 font-medium text-zinc-500">{player.twitter}</p>
+              <h1 className="mt-2 text-4xl font-black">{player.name}</h1>
+
+              <p className="mt-1 font-medium text-zinc-500">{player.twitter}</p>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -128,6 +142,18 @@ export default async function MyPage() {
               </Link>
             )}
           </div>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <p className="text-sm font-bold tracking-[0.15em] text-violet-500">
+          ICON
+        </p>
+
+        <h2 className="mt-1 text-2xl font-black">アイコン</h2>
+
+        <div className="mt-5 rounded-[1.5rem] border border-white bg-white p-6 shadow-sm">
+          <AvatarForm name={player.name} avatarUrl={avatarUrl} />
         </div>
       </section>
 

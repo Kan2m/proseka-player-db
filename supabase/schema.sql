@@ -18,6 +18,10 @@ create table if not exists public.player_profiles (
   updated_by text -- 更新した X の内部ID
 );
 
+-- 選手アイコン(Storage の avatars バケット内のパス)。既存のテーブルにも追加できるよう alter で書く
+alter table public.player_profiles
+  add column if not exists avatar_path text;
+
 -- YouTube チャンネルの登録申請(運営が承認したものだけ公開)
 create table if not exists public.youtube_requests (
   id uuid primary key default gen_random_uuid(),
@@ -51,3 +55,14 @@ drop policy if exists "approved channels are public" on public.youtube_requests;
 create policy "approved channels are public"
   on public.youtube_requests for select
   using (status = 'approved');
+
+-- 選手アイコン用の公開バケット。誰でも読めるが、書き込みはサーバー(シークレットキー)経由のみ
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'avatars',
+  'avatars',
+  true,
+  524288, -- 512KB(アップロード前にブラウザで 256px に縮小している)
+  array['image/webp', 'image/png', 'image/jpeg']
+)
+on conflict (id) do nothing;
