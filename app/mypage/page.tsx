@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/server";
 import PlayerAvatar from "../components/PlayerAvatar";
 import { getCurrentAccount } from "../lib/auth";
-import { avatarPublicUrl } from "../lib/avatar";
+import { avatarPublicUrl, xAvatarUrl } from "../lib/avatar";
 import { statusLabels, type YoutubeRequest } from "../lib/profiles";
 import { deleteYoutubeChannel, logout } from "./actions";
 import AvatarForm from "./AvatarForm";
@@ -121,7 +121,7 @@ export default async function MyPage() {
         <div className="relative flex flex-wrap items-end justify-between gap-4">
           <div className="flex items-center gap-5">
             <PlayerAvatar
-              src={avatarUrl}
+              src={avatarUrl ?? xAvatarUrl(player.id)}
               name={player.name}
               className="h-20 w-20 rounded-3xl"
             />
@@ -165,7 +165,11 @@ export default async function MyPage() {
         <h2 className="mt-1 text-2xl font-black">アイコン</h2>
 
         <div className="mt-5 rounded-[1.5rem] border border-white bg-white p-6 shadow-sm">
-          <AvatarForm name={player.name} avatarUrl={avatarUrl} />
+          <AvatarForm
+            name={player.name}
+            avatarUrl={avatarUrl}
+            defaultAvatarUrl={xAvatarUrl(player.id)}
+          />
         </div>
       </section>
 

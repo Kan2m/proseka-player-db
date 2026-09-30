@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch-x-avatars": "node --experimental-strip-types --no-warnings --env-file=.env.local scripts/fetch-x-avatars.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

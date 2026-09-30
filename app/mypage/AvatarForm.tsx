@@ -51,10 +51,17 @@ async function toSquareAvatar(file: File) {
 
 type AvatarFormProps = {
   name: string;
+  // マイページで設定したアイコン
   avatarUrl: string | null;
+  // 未設定の時に表示する初期アイコン(X のアイコン)
+  defaultAvatarUrl: string | null;
 };
 
-export default function AvatarForm({ name, avatarUrl }: AvatarFormProps) {
+export default function AvatarForm({
+  name,
+  avatarUrl,
+  defaultAvatarUrl,
+}: AvatarFormProps) {
   const [state, setState] = useState<FormState>(null);
   const [saving, startSave] = useTransition();
   const [deleting, startDelete] = useTransition();
@@ -138,7 +145,7 @@ export default function AvatarForm({ name, avatarUrl }: AvatarFormProps) {
   return (
     <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
       <PlayerAvatar
-        src={preview ?? avatarUrl}
+        src={preview ?? avatarUrl ?? defaultAvatarUrl}
         name={name}
         className="h-28 w-28 rounded-[1.75rem] ring-4 ring-white shadow-lg shadow-violet-100"
       />
@@ -208,6 +215,9 @@ export default function AvatarForm({ name, avatarUrl }: AvatarFormProps) {
         <p className="mt-3 text-xs leading-6 text-zinc-400">
           PNG・JPEG・WebP に対応。画像の中央が正方形に切り抜かれます。
           保存するとすぐに選手ページと選手一覧に表示されます。
+          {!avatarUrl &&
+            defaultAvatarUrl &&
+            " 未設定の間は X のアイコンを表示しています。"}
         </p>
 
         {message && (

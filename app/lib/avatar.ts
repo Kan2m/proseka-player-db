@@ -1,3 +1,5 @@
+import { xAvatarUrls } from "../data/xAvatars";
+
 // 選手アイコン(Supabase Storage の公開バケット)
 
 export const AVATAR_BUCKET = "avatars";
@@ -13,6 +15,12 @@ export const AVATAR_TYPES = {
   "image/png": "png",
   "image/jpeg": "jpg",
 } as const;
+
+// マイページでアイコン未設定の選手に使う初期アイコン(X のアイコン)。
+// URL は scripts/fetch-x-avatars.ts で取得して app/data/xAvatars.ts に保存している
+export function xAvatarUrl(playerId: string) {
+  return xAvatarUrls[playerId] ?? null;
+}
 
 export function avatarPublicUrl(path: string | null | undefined) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

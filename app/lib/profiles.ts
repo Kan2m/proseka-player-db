@@ -4,7 +4,8 @@ import {
   createPublicClient,
   isSupabaseConfigured,
 } from "@/lib/supabase/server";
-import { avatarPublicUrl } from "./avatar";
+import { xAvatarUrls } from "../data/xAvatars";
+import { avatarPublicUrl, xAvatarUrl } from "./avatar";
 
 export type YoutubeRequest = {
   id: string;
@@ -29,7 +30,7 @@ export async function getPublicProfile(playerId: string) {
   if (!isSupabaseConfigured) {
     return {
       bio: "",
-      avatarUrl: null as string | null,
+      avatarUrl: xAvatarUrl(playerId),
       youtubeUrls: [] as string[],
     };
   }
@@ -59,17 +60,19 @@ export async function getPublicProfile(playerId: string) {
 
   return {
     bio: (profileResult.data?.bio as string | undefined) ?? "",
-    avatarUrl: avatarPublicUrl(
-      profileResult.data?.avatar_path as string | null | undefined
-    ),
+    // マイページで設定したアイコン → X のアイコン の順に使う
+    avatarUrl:
+      avatarPublicUrl(
+        profileResult.data?.avatar_path as string | null | undefined
+      ) ?? xAvatarUrl(playerId),
     youtubeUrls: (youtubeResult.data ?? []).map((row) => row.url as string),
   };
 }
 
-// 選手一覧用: アイコンを設定している選手の { 選手ID: 画像URL }
+// 選手一覧用: { 選手ID: 画像URL }。マイページで設定したアイコンを X のアイコンより優先する
 export async function getAvatarUrls(): Promise<Record<string, string>> {
   if (!isSupabaseConfigured) {
-    return {};
+    return { ...xAvatarUrls };
   }
 
   const { data, error } = await createPublicClient()
@@ -81,12 +84,14 @@ export async function getAvatarUrls(): Promise<Record<string, string>> {
     console.error("[profiles] avatar list load failed:", error);
   }
 
-  return Object.fromEntries(
+  const uploaded = Object.fromEntries(
     (data ?? []).flatMap((row) => {
       const url = avatarPublicUrl(row.avatar_path as string);
       return url ? [[row.player_id as string, url]] : [];
     })
   );
+
+  return { ...xAvatarUrls, ...uploaded };
 }
 
 // 受け付ける URL 例:
