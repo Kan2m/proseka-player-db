@@ -9,15 +9,19 @@ export default function LoginButton() {
   const handleLogin = async () => {
     setLoading(true);
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "x",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "x",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+    } catch {
       setLoading(false);
       alert("ログインに失敗しました。時間をおいて再度お試しください。");
     }

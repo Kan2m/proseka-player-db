@@ -1,6 +1,7 @@
 import "server-only";
 
 import type { User } from "@supabase/supabase-js";
+import { connection } from "next/server";
 import { players } from "../data/players";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 
@@ -39,6 +40,9 @@ const adminHandles = [
   .filter(Boolean);
 
 export async function getCurrentAccount() {
+  // ログイン状態はリクエストごとに異なるので、呼び出し元ページを必ず動的にする
+  await connection();
+
   if (!isSupabaseConfigured) {
     return null;
   }

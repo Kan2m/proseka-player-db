@@ -7,6 +7,7 @@ import {
   tournamentNames,
   tournamentOrder,
 } from "./data/players";
+import { tournaments } from "./data/tournaments";
 import {
   getPlayerTournamentResult,
   getResultStyle,
@@ -15,11 +16,11 @@ import {
 const tournamentShortNames: Record<string, string> = {
   RAGE: "RAGE",
   cs21A: "CS2021",
-  cs22S: "CS2022S",
-  cs22A: "CS2022A",
+  cs22S: "CS2022春",
+  cs22A: "CS2022秋",
   cs23S: "CS2023",
   wcs24: "WCS2024",
-  cs24A: "CS2024A",
+  cs24A: "CS2024秋",
   cs25: "CS2025",
   cs26: "CS2026",
   white2025: "ほわいと杯25",
@@ -131,44 +132,51 @@ export default function Home() {
               ほわいと杯の出場選手をまとめています。
             </p>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-3xl bg-violet-50 p-5">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <a
+                href="#players"
+                className="group rounded-3xl bg-violet-50 p-5 transition hover:-translate-y-0.5 hover:bg-violet-100"
+              >
                 <p className="text-sm font-bold text-violet-500">
-                  登録選手
+                  登録選手から見る
                 </p>
 
-                <p className="mt-2 text-3xl font-black text-violet-700">
-                  {players.length}
-                  <span className="ml-1 text-base">人</span>
-                </p>
-              </div>
+                <p className="mt-2 flex items-end justify-between text-3xl font-black text-violet-700">
+                  <span>
+                    {players.length}
+                    <span className="ml-1 text-base">人</span>
+                  </span>
 
-              <div className="rounded-3xl bg-pink-50 p-5">
+                  <span className="text-lg transition group-hover:translate-y-0.5">
+                    ↓
+                  </span>
+                </p>
+              </a>
+
+              <Link
+                href="/tournaments"
+                className="group rounded-3xl bg-pink-50 p-5 transition hover:-translate-y-0.5 hover:bg-pink-100"
+              >
                 <p className="text-sm font-bold text-pink-500">
-                  大会数
+                  大会から見る
                 </p>
 
-                <p className="mt-2 text-3xl font-black text-pink-700">
-                  11
-                  <span className="ml-1 text-base">大会</span>
-                </p>
-              </div>
+                <p className="mt-2 flex items-end justify-between text-3xl font-black text-pink-700">
+                  <span>
+                    {tournaments.length}
+                    <span className="ml-1 text-base">大会</span>
+                  </span>
 
-              <div className="rounded-3xl bg-sky-50 p-5">
-                <p className="text-sm font-bold text-sky-500">
-                  登録済み
+                  <span className="text-lg transition group-hover:translate-x-0.5">
+                    →
+                  </span>
                 </p>
-
-                <p className="mt-2 text-3xl font-black text-sky-700">
-                  {players.length}
-                  <span className="ml-1 text-base">人</span>
-                </p>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="mt-12">
+        <section id="players" className="mt-12 scroll-mt-24">
           <div className="mb-6">
             <p className="text-xs font-black tracking-[0.2em] text-pink-500">
               PLAYERS
@@ -241,9 +249,12 @@ export default function Home() {
                   href={`/players/${player.id}`}
                   className="group relative overflow-visible rounded-[1.75rem] border border-white bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-100"
                 >
-                  <div
-                    className={`absolute left-0 top-0 h-1.5 w-full rounded-t-[1.75rem] bg-gradient-to-r ${accent}`}
-                  />
+                  {/* カード自体はツールチップのため overflow-visible なので、上部のラインだけ角丸で切り抜く */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[1.75rem]">
+                    <div
+                      className={`h-1.5 w-full bg-gradient-to-r ${accent}`}
+                    />
+                  </div>
 
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
