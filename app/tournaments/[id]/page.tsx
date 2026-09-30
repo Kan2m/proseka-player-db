@@ -4,6 +4,7 @@ import {
   tournaments,
 } from "../../data/tournaments";
 import { players } from "../../data/players";
+import ArchivePlayer from "./ArchivePlayer";
 
 type PageProps = {
   params: Promise<{
@@ -100,6 +101,35 @@ export default async function TournamentPage({ params }: PageProps) {
             {tournament.description}
           </p>
         </section>
+
+        {/* 配信アーカイブ */}
+        {tournament.archives && tournament.archives.length > 0 && (
+          <section className="mt-8">
+            <div className="mb-5">
+              <p className="text-sm font-bold tracking-[0.15em] text-red-500">
+                ARCHIVE
+              </p>
+
+              <h2 className="mt-1 text-3xl font-black">配信アーカイブ</h2>
+            </div>
+
+            <div
+              className={`grid gap-4 ${
+                tournament.archives.length > 1
+                  ? "md:grid-cols-2"
+                  : "max-w-3xl"
+              }`}
+            >
+              {tournament.archives.map((archive) => (
+                <ArchivePlayer
+                  key={archive.videoId}
+                  archive={archive}
+                  tournamentName={tournament.name}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 個人戦・通常結果 */}
         {tournament.results && tournament.results.length > 0 && (

@@ -10,12 +10,21 @@ export type DoublesResult = {
   team: string[];
 };
 
+// YouTube の配信アーカイブ(videoId は youtube.com/watch?v= の後ろの部分)
+export type TournamentArchive = {
+  title: string;
+  videoId: string;
+  channel: string;
+  note?: string;
+};
+
 export type Tournament = {
   id: TournamentKey;
   name: string;
   date: string;
   category: string;
   description: string;
+  archives?: TournamentArchive[];
   results?: TournamentResult[];
   doublesResults?: DoublesResult[];
 };
@@ -28,6 +37,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "プロセカ初の公式大会。唯一ChampionShipではない。決勝初見曲は「千本桜」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "P8QTYVL-JS8",
+      channel: "esports_RAGE",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -79,6 +95,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "プロセカで最初のCS。有観客で実施された。決勝初見曲は「ロストワンの号哭」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "VrLQ3VpBaXo",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -130,6 +153,13 @@ export const tournaments: Tournament[] = [
   category: "チーム戦",
   description:
     "プロセカ初のチーム戦、BAN PICK方式も初採用。決勝初見曲は「脳漿炸裂ガール」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "aq8-3XKKI0c",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -184,6 +214,13 @@ export const tournaments: Tournament[] = [
   category: "チーム戦",
   description:
     "2度目のチーム戦。決勝初見曲は「腐れ外道とチョコレゐト」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "3yYixwkgtdc",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -238,6 +275,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "2年ぶりの個人戦であり、4つの部門に分けられた唯一の大会。決勝初見曲は「セツナトリップ」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "KqG41tEIOZs",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -312,6 +356,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "プロセカ初の公式世界大会。予選も4カ国に分かれて実施。決勝初見曲は「東京テディベア」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "nBbAKS11PoY",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -373,6 +424,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "初の準決勝での初見曲採用。準決勝の初見曲は「snooze」「混沌ブギ」「アンヘル」「のだ」、決勝初見曲は「プロトディスコ」。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "QdO3Kn-yGRY",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -420,6 +478,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦",
   description:
     "4年ぶりの有観客開催。決勝初見曲は2曲あり「IMAWANOKIWA」、「怪獣になりたい」",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "9DuNdL532oU",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -467,6 +532,14 @@ export const tournaments: Tournament[] = [
   category: "チーム戦",
   description:
     "4年ぶりのチーム戦。",
+  archives: [
+    {
+      title: "本戦",
+      videoId: "HrOPTDVYFog",
+      channel: "プロジェクトセカイ カラフルステージ! feat. 初音ミク",
+      note: "2026/10/03 17:30 配信予定",
+    },
+  ],
   results: [
     {
       rank: "準決勝出場",
@@ -510,6 +583,13 @@ export const tournaments: Tournament[] = [
   category: "個人戦・ダブルス",
   description:
     "初の大型オフライン大会。個人戦とダブルス部門の2部門で開催。",
+  archives: [
+    {
+      title: "オフライン決勝ステージ",
+      videoId: "46t2YbCYepM",
+      channel: "ほわいとさんの音ゲー部屋",
+    },
+  ],
   results: [
     {
       rank: "優勝",
@@ -576,6 +656,18 @@ export const tournaments: Tournament[] = [
   category: "個人戦・ダブルス",
   description:
     "2回目の非公式大型オフライン大会。個人戦とダブルス部門の2部門で開催。",
+  archives: [
+    {
+      title: "予選ステージ代表者決定戦",
+      videoId: "LI-eQc3axis",
+      channel: "ほわいとさんの音ゲー部屋",
+    },
+    {
+      title: "オフライン決勝ステージ",
+      videoId: "G04vhE-4mVQ",
+      channel: "ほわいとさんの音ゲー部屋",
+    },
+  ],
   results: [
     { rank: "優勝", players: ["kaya"] },
     { rank: "準優勝", players: ["Koma."] },
