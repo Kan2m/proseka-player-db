@@ -5,12 +5,20 @@ import {
   tournamentNames,
   tournamentOrder,
 } from "../../data/players";
+import { getPublicProfile } from "../../lib/profiles";
+import {
+  getPlayerTournamentResult,
+  getResultStyle,
+} from "../../lib/results";
 
 type PageProps = {
   params: Promise<{
     id: string;
   }>;
 };
+
+// マイページでの更新時は revalidatePath で即時反映。念のため定期的にも再生成する
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return players.map((player) => ({
@@ -46,6 +54,8 @@ export default async function PlayerPage({ params }: PageProps) {
       </main>
     );
   }
+
+  const profile = await getPublicProfile(player.id);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-pink-50 text-zinc-800">
@@ -102,6 +112,48 @@ export default async function PlayerPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* 自己紹介・YouTube(選手本人がマイページで設定) */}
+        {(profile.bio || profile.youtubeUrls.length > 0) && (
+          <section className="mt-10">
+            <p className="text-sm font-bold tracking-[0.15em] text-violet-500">
+              ABOUT
+            </p>
+
+            <h2 className="mt-1 text-3xl font-black">自己紹介</h2>
+
+            <div className="mt-5 rounded-[1.5rem] border border-white bg-white p-6 shadow-sm">
+              {profile.bio && (
+                <p className="whitespace-pre-wrap break-words leading-7 text-zinc-600">
+                  {profile.bio}
+                </p>
+              )}
+
+              {profile.youtubeUrls.length > 0 && (
+                <div
+                  className={`flex flex-wrap gap-2 ${
+                    profile.bio ? "mt-5 border-t border-zinc-100 pt-5" : ""
+                  }`}
+                >
+                  {profile.youtubeUrls.map((url) => (
+                    <a
+                      key={url}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-100"
+                    >
+                      ▶ YouTube
+                      <span className="font-medium text-red-400">
+                        {url.replace("https://www.youtube.com/", "")}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
        {/* 大会出場歴 */}
 <section className="mt-10">
   <div className="mb-5 flex items-end justify-between">
@@ -123,27 +175,51 @@ export default async function PlayerPage({ params }: PageProps) {
   <div className="space-y-3">
     {tournamentOrder
       .filter((key) => player.tournaments[key])
-      .map((key, index) => (
-        <Link
-          key={key}
-          href={`/tournaments/${key}`}
-          className="flex items-center justify-between rounded-2xl border border-white bg-white px-5 py-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-        >
-          <div className="flex items-center gap-4">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-pink-400 text-sm font-black text-white">
-              {index + 1}
-            </span>
+      .map((key, index) => {
+        const { individualResult, doublesResult, rank } =
+          getPlayerTournamentResult(player, key);
+        const resultStyle = getResultStyle(rank);
 
-            <p className="font-bold text-zinc-800">
-              {tournamentNames[key]}
-            </p>
-          </div>
+        return (
+          <Link
+            key={key}
+            href={`/tournaments/${key}`}
+            className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white bg-white px-5 py-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className="flex min-w-0 items-center gap-4">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-pink-400 text-sm font-black text-white">
+                {index + 1}
+              </span>
 
-          <span className="rounded-full bg-violet-100 px-4 py-1.5 text-xs font-black text-violet-600">
-            出場
-          </span>
-        </Link>
-      ))}
+              <p className="font-bold text-zinc-800">
+                {tournamentNames[key]}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-end gap-2">
+              {!individualResult && !doublesResult && (
+                <span className="rounded-full bg-violet-100 px-4 py-1.5 text-xs font-black text-violet-600">
+                  出場
+                </span>
+              )}
+
+              {individualResult && (
+                <span
+                  className={`rounded-full px-4 py-1.5 text-xs font-black ${resultStyle.className}`}
+                >
+                  {resultStyle.icon} {individualResult.rank}
+                </span>
+              )}
+
+              {doublesResult && (
+                <span className="rounded-full bg-pink-50 px-4 py-1.5 text-xs font-black text-pink-700">
+                  🤝 ダブルス {doublesResult.rank}
+                </span>
+              )}
+            </div>
+          </Link>
+        );
+      })}
   </div>
 </section>
 
