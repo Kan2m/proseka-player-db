@@ -320,7 +320,7 @@ export const players: Player[] = [
       cs25: true,
       cs26: true,
     },
-    notes: "2025CSで5位"
+    notes: "WCS2024で5位"
   },
   {
     id: "matezon",
@@ -447,6 +447,7 @@ export const players: Player[] = [
     result: "優勝",
     achievements: [
     "ダブルス優勝",
+    "ダブルス準優勝",
     "準決勝進出",
   ],
     tournaments: {
@@ -456,7 +457,7 @@ export const players: Player[] = [
       white2025: true,
       white2026: true,
     },
-    notes: "ほわいと杯2025 ダブルス部門で優勝 / 過去に「カルボナーラ24時」名義で出場",
+    notes: "ほわいと杯2025 ダブルス部門で優勝 / ほわいと杯2026 ダブルス部門で準優勝 / 過去に「カルボナーラ24時」名義で出場",
   },
   {
     id: "kiranyan",
@@ -951,7 +952,7 @@ export const players: Player[] = [
   ],
     tournaments: {
       cs24A: true,
-      white2026: true,
+      white2025: true,
     },
   },
   {
@@ -979,7 +980,7 @@ export const players: Player[] = [
   ],
     tournaments: {
       cs24A: true,
-      white2026: true,
+      white2025: true,
     },
     notes: "第10回APマラソンで優勝"
   },
@@ -1369,10 +1370,11 @@ export const players: Player[] = [
 {
   id: "midotsuki",
   name: "みどつき",
-  twitter: "",
+  twitter: "@GreMoooon_",
   aliases: ["みどつき"],
   appearances: 1,
   result: "準決勝",
+  notes: "現在は「ぐりむーん」として活動。",
   achievements: [
     "準決勝進出"
   ],
@@ -1828,7 +1830,7 @@ export const players: Player[] = [
 {
   id: "echo",
   name: "Echo",
-  twitter: "",
+  twitter: "@echocentrical",
   aliases: ["Echo"],
   appearances: 1,
   result: "準々決勝",
