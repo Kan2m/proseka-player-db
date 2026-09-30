@@ -85,9 +85,19 @@ export default async function PlayerPage({ params }: PageProps) {
               {player.name}
             </h1>
 
-            <p className="mt-3 font-medium text-zinc-500">
-              {player.twitter}
-            </p>
+            {player.twitter && (
+              <a
+                href={`https://x.com/${player.twitter.replace(/^@/, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-800 transition hover:bg-zinc-200"
+              >
+                𝕏
+                <span className="font-medium text-zinc-500">
+                  {player.twitter}
+                </span>
+              </a>
+            )}
 
             <div className="mt-8 grid grid-cols-2 gap-4 md:max-w-xl">
               <div className="rounded-2xl bg-violet-50 p-5">
@@ -184,19 +194,19 @@ export default async function PlayerPage({ params }: PageProps) {
           <Link
             key={key}
             href={`/tournaments/${key}`}
-            className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white bg-white px-5 py-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-white bg-white px-5 py-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <div className="flex min-w-0 items-center gap-4">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-pink-400 text-sm font-black text-white">
                 {index + 1}
               </span>
 
-              <p className="font-bold text-zinc-800">
+              <p className="font-bold text-zinc-800 [overflow-wrap:anywhere]">
                 {tournamentNames[key]}
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-end gap-2">
+            <div className="flex shrink-0 flex-col items-end gap-2 sm:flex-row">
               {!individualResult && !doublesResult && (
                 <span className="rounded-full bg-violet-100 px-4 py-1.5 text-xs font-black text-violet-600">
                   出場
