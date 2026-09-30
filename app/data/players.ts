@@ -1068,8 +1068,8 @@ export const players: Player[] = [
     },
   },
   {
-    id: "Unknowm",
-    name: "Unknowm",
+    id: "Unknown",
+    name: "Unknown",
     twitter: "",
     appearances: 1,
     result: "準決勝",
