@@ -7,7 +7,10 @@ import {
   tournamentNames,
   tournamentOrder,
 } from "./data/players";
-import { getTournamentById } from "./data/tournaments";
+import {
+  getPlayerTournamentResult,
+  getResultStyle,
+} from "./lib/results";
 
 const tournamentShortNames: Record<string, string> = {
   RAGE: "RAGE",
@@ -21,63 +24,6 @@ const tournamentShortNames: Record<string, string> = {
   cs26: "CS2026",
   white2025: "ほわいと杯25",
   white2026: "ほわいと杯26",
-};
-
-const getResultStyle = (rank: string) => {
-  // 準優勝を先に判定するのがポイント
-  if (rank === "準優勝" || rank === "U-12 準優勝") {
-    return {
-      className: "bg-zinc-200 text-zinc-700",
-      icon: "🥈",
-    };
-  }
-
-  if (rank === "優勝" || rank === "U-12 優勝") {
-    return {
-      className: "bg-yellow-100 text-yellow-700",
-      icon: "🏆",
-    };
-  }
-
-  if (rank === "3位" || rank === "U-12 3位") {
-    return {
-      className: "bg-orange-100 text-orange-700",
-      icon: "🥉",
-    };
-  }
-
-  if (rank === "4位" || rank === "U-12 4位") {
-    return {
-      className: "bg-red-100 text-red-600",
-      icon: "4️⃣",
-    };
-  }
-
-  if (rank === "5位") {
-    return {
-      className: "bg-rose-100 text-rose-600",
-      icon: "5️⃣",
-    };
-  }
-
-  if (rank.includes("準決勝")) {
-    return {
-      className: "bg-blue-100 text-blue-700",
-      icon: "🔵",
-    };
-  }
-
-  if (rank.includes("準々決勝")) {
-    return {
-      className: "bg-violet-100 text-violet-700",
-      icon: "🟣",
-    };
-  }
-
-  return {
-    className: "bg-zinc-100 text-zinc-500",
-    icon: "•",
-  };
 };
 
 export default function Home() {
@@ -144,6 +90,13 @@ export default function Home() {
           </Link>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/mypage"
+              className="rounded-full bg-violet-50 px-4 py-2 text-xs font-bold text-violet-600 transition hover:bg-violet-100 hover:text-violet-700"
+            >
+              MY PAGE
+            </Link>
+
             <Link
               href="/info"
               className="rounded-full bg-pink-50 px-4 py-2 text-xs font-bold text-pink-500 transition hover:bg-pink-100 hover:text-pink-600"
@@ -308,15 +261,18 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-violet-50 px-3 py-1.5 text-xs font-black text-violet-600">
-                      {appearances}大会出場
+                  <p className="mt-4 text-sm font-bold text-zinc-500">
+                    出場回数
+                    <span className="ml-1.5 text-base font-black text-violet-600">
+                      {appearances}
                     </span>
-
-                    <span className="rounded-full bg-pink-50 px-3 py-1.5 text-xs font-black text-pink-600">
-                      最高 {player.result}
+                    <span className="ml-0.5">回</span>
+                    <span className="mx-2 text-zinc-300">/</span>
+                    最高成績
+                    <span className="ml-1.5 text-base font-black text-pink-600">
+                      {player.result}
                     </span>
-                  </div>
+                  </p>
 
                   {player.achievements &&
                     player.achievements.length > 0 && (
@@ -396,40 +352,16 @@ export default function Home() {
                         (key) => player.tournaments[key]
                       )
                       .map((key) => {
-                        const tournament =
-                          getTournamentById(key);
+                        const {
+                          tournament,
+                          individualResult,
+                          doublesResult,
+                          rank,
+                        } = getPlayerTournamentResult(player, key);
 
                         if (!tournament) {
                           return null;
                         }
-
-                        const individualResult =
-                          tournament.results?.find((result) =>
-                            result.players.some(
-                              (playerName) =>
-                                player.name === playerName ||
-                                player.aliases?.includes(
-                                  playerName
-                                )
-                            )
-                          );
-
-                        const doublesResult =
-                          tournament.doublesResults?.find(
-                            (result) =>
-                              result.team.some(
-                                (playerName) =>
-                                  player.name === playerName ||
-                                  player.aliases?.includes(
-                                    playerName
-                                  )
-                              )
-                          );
-
-                        const rank =
-                          individualResult?.rank ??
-                          doublesResult?.rank ??
-                          "出場";
 
                         const resultStyle =
                           getResultStyle(rank);
