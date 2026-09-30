@@ -945,7 +945,7 @@ export const players: Player[] = [
     id: "paly",
     name: "ぱりぃ",
     twitter: "@Paly_4_game",
-    appearances: 2,
+    appearances: 3,
     result: "準決勝",
     achievements: [
     "準決勝進出"
@@ -953,6 +953,7 @@ export const players: Player[] = [
     tournaments: {
       cs24A: true,
       white2025: true,
+      white2026: true,
     },
   },
   {
@@ -973,7 +974,7 @@ export const players: Player[] = [
     id: "rsa",
     name: "RSA",
     twitter: "@RSA_3435",
-    appearances: 2,
+    appearances: 3,
     result: "準決勝",
     achievements: [
     "準決勝進出"
@@ -981,6 +982,7 @@ export const players: Player[] = [
     tournaments: {
       cs24A: true,
       white2025: true,
+      white2026: true,
     },
     notes: "第10回APマラソンで優勝"
   },
@@ -2016,4 +2018,18 @@ export const players: Player[] = [
 
 export function getPlayerById(id: string) {
   return players.find((player) => player.id === id);
+}
+
+// 大会結果に書かれた名前から選手を探す。
+// 同じ名前・別名の別人がいる場合(例: RAGE の「り」とリリィの旧名「り」)は、
+// その大会に出場した記録がある選手を優先する
+export function findPlayerByName(name: string, tournamentId: TournamentKey) {
+  const candidates = players.filter(
+    (player) => player.name === name || player.aliases?.includes(name)
+  );
+
+  return (
+    candidates.find((player) => player.tournaments[tournamentId]) ??
+    candidates[0]
+  );
 }

@@ -3,7 +3,7 @@ import {
   getTournamentById,
   tournaments,
 } from "../../data/tournaments";
-import { players } from "../../data/players";
+import { findPlayerByName } from "../../data/players";
 import ArchivePlayer from "./ArchivePlayer";
 
 type PageProps = {
@@ -158,10 +158,9 @@ export default async function TournamentPage({ params }: PageProps) {
 
                   <div className="flex flex-wrap gap-3">
                     {result.players.map((playerName) => {
-                      const player = players.find(
-                        (player) =>
-                          player.name === playerName ||
-                          player.aliases?.includes(playerName)
+                      const player = findPlayerByName(
+                        playerName,
+                        tournament.id
                       );
 
                       if (player) {
@@ -220,10 +219,9 @@ export default async function TournamentPage({ params }: PageProps) {
 
                     <div className="flex flex-wrap items-center gap-3">
                       {result.team.map((playerName) => {
-                        const player = players.find(
-                          (player) =>
-                            player.name === playerName ||
-                            player.aliases?.includes(playerName)
+                        const player = findPlayerByName(
+                          playerName,
+                          tournament.id
                         );
 
                         if (player) {
