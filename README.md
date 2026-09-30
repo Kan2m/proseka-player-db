@@ -3,29 +3,37 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## ログイン・マイページのセットアップ
 
 選手本人が X でログインし、自己紹介や YouTube チャンネル(運営承認制)を設定できます。
-ログインとデータ保存には Supabase(無料プラン)を使います。
+ログインは自前の X OAuth 2.0 (PKCE) で行い、Supabase はデータ保存のみに使います。
 
-1. **Supabase プロジェクトを作成** (https://supabase.com)
-   - SQL Editor で `supabase/schema.sql` を実行
-2. **X のアプリを作成** (https://developer.x.com の Free プラン)
-   - User authentication settings で OAuth 2.0 を有効化、種類は「Web App」
-   - Callback URI: `https://<project-ref>.supabase.co/auth/v1/callback`
-   - Website URL: 本番サイトの URL
+### 取得する情報(最小限)
+
+- X に要求する権限は `users.read` のみ(投稿・メールアドレス・長期トークンは要求しない)
+- 取得・保存するのは X の **内部ID とユーザー名** だけ
+- X のアクセストークンは本人確認直後に無効化し、保存しない
+- ログイン状態は署名付き httpOnly Cookie(内部ID・ユーザー名・有効期限のみ)
+- X API は従量課金のため、ログイン1回につき約 $0.01 かかる
+
+### 手順
+
+1. **Supabase プロジェクトを作成**し、SQL Editor で `supabase/schema.sql` を実行
+2. **X Developer Console でアプリを設定**
+   - ユーザー認証設定: 権限「読む」、種類「ウェブアプリ」、メール取得 OFF
+   - Callback URI: `https://<本番ドメイン>/auth/x/callback` と `http://localhost:3000/auth/x/callback`
    - Client ID / Client Secret を控える
-3. **Supabase で X ログインを有効化**
-   - Authentication > Sign In / Providers > **X / Twitter (OAuth 2.0)** に Client ID / Secret を入力
-   - Authentication > URL Configuration の Site URL に本番 URL、Redirect URLs に
-     `https://<本番ドメイン>/auth/callback` と `http://localhost:3000/auth/callback` を追加
-4. **環境変数を設定** (`.env.example` を `.env.local` にコピー。Vercel では Project Settings > Environment Variables)
+3. **環境変数を設定**(`.env.example` を `.env.local` にコピー。Vercel では Project Settings > Environment Variables)
    - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_SECRET_KEY`
+   - `X_CLIENT_ID` / `X_CLIENT_SECRET`
+   - `SESSION_SECRET`: 32文字以上のランダム文字列
    - `ADMIN_X_IDS`(任意): 管理者を追加する場合のみ。基本の管理者は `app/lib/auth.ts` の `ADMIN_X_IDS` に記載
 
 ### 仕組み
 
-- `/mypage`: ログインした X の ID と `app/data/players.ts` の `twitter` が一致する選手だけが編集可能
-- `/admin`: `app/lib/auth.ts` の `ADMIN_X_IDS`(と同名の環境変数)に含まれるアカウントだけが YouTube チャンネル申請を承認・却下できる
+- 初回ログイン時、X のユーザー名が `app/data/players.ts` の `twitter` と一致(大文字小文字も区別)すれば、
+  その選手と X の内部IDを `player_accounts` に紐付ける。以降は内部IDで照合するため、
+  選手が @名 を変更しても入れ、古い @名 を別人が取得しても入れない
+- 紐付けをやり直す場合は Supabase の `player_accounts` から該当行を削除する
+- `/admin`: `ADMIN_X_IDS` に含まれるアカウントだけが YouTube チャンネル申請を承認・却下できる
 - 選手ページには自己紹介と承認済みチャンネルだけが表示される
-- X の ID を変更した選手は `players.ts` の `twitter` も更新が必要
 
 ## Getting Started
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentAccount } from "../lib/auth";
-import LoginButton from "./LoginButton";
 
 type PageProps = {
   searchParams: Promise<{ error?: string }>;
@@ -38,12 +37,36 @@ export default async function LoginPage({ searchParams }: PageProps) {
 
           {error && (
             <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600">
-              ログインに失敗しました。もう一度お試しください。
+              {error === "config"
+                ? "ログイン機能の設定が完了していません。運営にお問い合わせください。"
+                : "ログインに失敗しました。もう一度お試しください。"}
             </p>
           )}
 
           <div className="mt-8">
-            <LoginButton />
+            {/* 自前の X OAuth へ遷移(JS不要) */}
+            <a
+              href="/auth/x/login"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-3.5 text-sm font-black text-white transition hover:bg-zinc-700"
+            >
+              <span className="text-base">𝕏</span>
+              Xでログイン
+            </a>
+          </div>
+
+          <p className="mt-4 text-xs leading-6 text-zinc-400">
+            取得するのはXの内部IDとユーザー名のみです。投稿・メールアドレス等へのアクセスは行わず、Xのトークンはログイン確認後すぐに無効化しています。
+          </p>
+
+          {/* X アプリが認可画面を横取りする X 側の既知の問題への案内 */}
+          <div className="mt-6 rounded-2xl bg-violet-50 px-4 py-3 text-xs leading-6 text-violet-700">
+            <p className="font-black">スマホでXアプリが開いてログインできない場合</p>
+            <ul className="mt-1 list-disc pl-4">
+              <li>PCのブラウザからログインしてください(おすすめ)</li>
+              <li>
+                Android: 設定 → アプリ → X → 「デフォルトで開く」の対応リンクをオフにすると、ブラウザでログインできます
+              </li>
+            </ul>
           </div>
         </section>
       </div>

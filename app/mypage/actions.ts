@@ -2,9 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createAdminClient, createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 import { getCurrentAccount } from "../lib/auth";
 import { normalizeYoutubeChannelUrl } from "../lib/profiles";
+import { clearSession } from "../lib/session";
 
 export type FormState = {
   ok: boolean;
@@ -22,14 +23,14 @@ async function requirePlayer() {
     throw new Error("unauthorized");
   }
 
-  return { user: account.user, player: account.player };
+  return { xUserId: account.xUserId, player: account.player };
 }
 
 export async function updateBio(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const { user, player } = await requirePlayer();
+  const { xUserId, player } = await requirePlayer();
   const bio = String(formData.get("bio") ?? "").trim();
 
   if (bio.length > BIO_MAX_LENGTH) {
@@ -45,7 +46,7 @@ export async function updateBio(
       player_id: player.id,
       bio,
       updated_at: new Date().toISOString(),
-      updated_by: user.id,
+      updated_by: xUserId,
     });
 
   if (error) {
@@ -62,7 +63,7 @@ export async function requestYoutubeChannel(
   _prev: FormState,
   formData: FormData
 ): Promise<FormState> {
-  const { user, player } = await requirePlayer();
+  const { xUserId, player } = await requirePlayer();
   const url = normalizeYoutubeChannelUrl(String(formData.get("url") ?? ""));
 
   if (!url) {
@@ -98,7 +99,7 @@ export async function requestYoutubeChannel(
   const { error } = await supabase.from("youtube_requests").insert({
     player_id: player.id,
     url,
-    requested_by: user.id,
+    requested_by: xUserId,
   });
 
   if (error) {
@@ -129,8 +130,7 @@ export async function deleteYoutubeChannel(formData: FormData) {
 }
 
 export async function logout() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
+  await clearSession();
 
   redirect("/");
 }

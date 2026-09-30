@@ -1,24 +1,12 @@
 import "server-only";
 
-import type { User } from "@supabase/supabase-js";
 import { connection } from "next/server";
-import { players } from "../data/players";
-import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { getPlayerById, players } from "../data/players";
+import { createAdminClient } from "@/lib/supabase/server";
+import { getSession } from "./session";
 
 // 大文字小文字は区別する(@の有無のみ無視)
 const normalizeHandle = (handle: string) => handle.trim().replace(/^@/, "");
-
-// X のユーザー名(@なし)を取得する。
-// user_metadata はユーザー自身が書き換えられるため、X から返された identity_data を使う
-function getXHandle(user: User) {
-  const identity = user.identities?.find(
-    (identity) => identity.provider === "x" || identity.provider === "twitter"
-  );
-  const data = identity?.identity_data;
-  const handle = data?.user_name ?? data?.preferred_username;
-
-  return typeof handle === "string" && handle ? normalizeHandle(handle) : null;
-}
 
 export function findPlayerByXHandle(handle: string) {
   const target = normalizeHandle(handle);
@@ -39,30 +27,67 @@ const adminHandles = [
   .map(normalizeHandle)
   .filter(Boolean);
 
+// ログイン時に「選手 ⇔ X の内部ID」を紐付ける。
+// 一度紐付いた選手は、その内部IDのアカウントでしか入れない
+// (@名の変更・使い回しによるなりすまし対策)
+export async function linkPlayerAccount(xUserId: string, xUsername: string) {
+  const supabase = createAdminClient();
+
+  const { data: existing } = await supabase
+    .from("player_accounts")
+    .select("player_id")
+    .eq("x_user_id", xUserId)
+    .maybeSingle();
+
+  if (existing) {
+    // 紐付け済み: @名が変わっていれば記録だけ更新
+    await supabase
+      .from("player_accounts")
+      .update({ x_username: xUsername })
+      .eq("x_user_id", xUserId);
+    return;
+  }
+
+  const player = findPlayerByXHandle(xUsername);
+
+  if (!player) {
+    return;
+  }
+
+  // 選手がすでに別の内部IDと紐付いている場合は主キー重複で失敗する(=入れない)
+  const { error } = await supabase.from("player_accounts").insert({
+    player_id: player.id,
+    x_user_id: xUserId,
+    x_username: xUsername,
+  });
+
+  if (error) {
+    console.error(
+      `[auth] player ${player.id} is already linked to another X account`
+    );
+  }
+}
+
 export async function getCurrentAccount() {
   // ログイン状態はリクエストごとに異なるので、呼び出し元ページを必ず動的にする
   await connection();
 
-  if (!isSupabaseConfigured) {
+  const session = await getSession();
+
+  if (!session) {
     return null;
   }
 
-  const supabase = await createClient();
-  // getSession ではなく getUser で Supabase 側に検証させる
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return null;
-  }
-
-  const xHandle = getXHandle(user);
+  const { data: link } = await createAdminClient()
+    .from("player_accounts")
+    .select("player_id")
+    .eq("x_user_id", session.xUserId)
+    .maybeSingle();
 
   return {
-    user,
-    xHandle,
-    player: xHandle ? findPlayerByXHandle(xHandle) : undefined,
-    isAdmin: xHandle ? adminHandles.includes(xHandle) : false,
+    xUserId: session.xUserId,
+    xHandle: session.xUsername,
+    player: link ? getPlayerById(link.player_id as string) : undefined,
+    isAdmin: adminHandles.includes(session.xUsername),
   };
 }
