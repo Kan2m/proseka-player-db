@@ -1411,6 +1411,20 @@ export const players: Player[] = [
     cs21A: true,
   },
 },
+{
+  id: "kyaito",
+  name: "きゃいと",
+  twitter: "",
+  aliases: [""],
+  appearances: 1,
+  result: "準決勝",
+  achievements: [
+    "準決勝進出"
+  ],
+  tournaments: {
+    cs22S: true,
+  },
+},
 
 {
   id: "f-shina",
