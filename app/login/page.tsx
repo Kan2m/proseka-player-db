@@ -35,6 +35,10 @@ export default async function LoginPage({ searchParams }: PageProps) {
             データベースに登録されているXアカウントでログインすると、マイページで自己紹介やYouTubeチャンネルを設定できます。
           </p>
 
+          <p className="mt-4 rounded-2xl bg-amber-50 px-4 py-3 text-sm font-bold leading-7 text-amber-700">
+            ※ ログインできるのは、データベースに選手として登録されているXアカウントのみです。登録されていないアカウントでログインしても、マイページは利用できません。
+          </p>
+
           {error && (
             <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600">
               {error === "config"

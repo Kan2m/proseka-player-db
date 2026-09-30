@@ -85,9 +85,19 @@ export default async function PlayerPage({ params }: PageProps) {
               {player.name}
             </h1>
 
-            <p className="mt-3 font-medium text-zinc-500">
-              {player.twitter}
-            </p>
+            {player.twitter && (
+              <a
+                href={`https://x.com/${player.twitter.replace(/^@/, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-800 transition hover:bg-zinc-200"
+              >
+                𝕏
+                <span className="font-medium text-zinc-500">
+                  {player.twitter}
+                </span>
+              </a>
+            )}
 
             <div className="mt-8 grid grid-cols-2 gap-4 md:max-w-xl">
               <div className="rounded-2xl bg-violet-50 p-5">
