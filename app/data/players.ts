@@ -19,6 +19,7 @@ export type Achievement =
   | "ダブルス準優勝"
   | "チーム準優勝"
   | "個人3位"
+  | "チーム3位"
   | "個人4位"
   | "個人5位"
   | "準決勝進出"
@@ -74,6 +75,7 @@ export const players: Player[] = [
      achievements: [
     "個人優勝",
     "ダブルス準優勝",
+    "チーム3位",
   ],
     tournaments: {
       cs22S: true,
@@ -84,7 +86,7 @@ export const players: Player[] = [
       cs26: true,
       white2025: true,
     },
-    notes: "2度の優勝(2022CS Spring 2023CS Spring) / ほわいと杯2025は個人戦4位、ダブルス部門準優勝",
+    notes: "2度の優勝(2022CS Spring 2023CS Spring) / ほわいと杯2025は個人戦4位、ダブルス部門準優勝 / CS2026 チーム「大三元」にて3位",
   },
   {
     id: "hps",
@@ -115,6 +117,7 @@ export const players: Player[] = [
     result: "準優勝",
      achievements: [
     "個人3位",
+    "チーム3位",
     "個人4位",
     "ダブルス準優勝",
   ],
@@ -139,6 +142,7 @@ export const players: Player[] = [
     aliases: ["まろやかれおちゃ♪" ,"デーモンコアくん"],
      achievements: [
     "個人優勝",
+    "チーム優勝",
     "個人準優勝",
   ],
     tournaments: {
@@ -149,7 +153,7 @@ export const players: Player[] = [
       cs26: true,
       white2026: true,
     },
-    notes: "唯一の個人戦二連覇(2024CS 2025CS) 2023CSはU-12部門出場。過去に「まろやかれおちゃ♪」「デーモンコアくん」名義で出場 / 第2回APマラソンで優勝",
+    notes: "唯一の個人戦二連覇(2024CS 2025CS) 2023CSはU-12部門出場。過去に「まろやかれおちゃ♪」「デーモンコアくん」名義で出場 / 第2回APマラソンで優勝 / CS2026 チーム「ドパるんちゅ」にて優勝",
   },
   {
     id: "temp",
@@ -272,6 +276,7 @@ export const players: Player[] = [
     aliases: ["初心者"],
     achievements: [
     "個人優勝",
+    "チーム優勝",
     "個人準優勝",
     "個人4位",
     "ダブルス優勝",
@@ -285,7 +290,7 @@ export const players: Player[] = [
       white2025: true,
       white2026: true,
     },
-    notes: "CS2023 SpringはU-12部門で出場し4位 / 過去に「初心者」名義で出場 / CS2025で準優勝 / ほわいと杯2025では両部門優勝 / ほわいと杯2026ではダブルスにて準優勝",
+    notes: "CS2023 SpringはU-12部門で出場し4位 / 過去に「初心者」名義で出場 / CS2025で準優勝 / ほわいと杯2025では両部門優勝 / ほわいと杯2026ではダブルスにて準優勝 / CS2026 チーム「ドパるんちゅ」にて優勝",
   },
   {
     id: "kanpari",
@@ -363,6 +368,7 @@ export const players: Player[] = [
     result: "優勝",
     achievements: [
     "個人優勝",
+    "チーム優勝",
     "個人準優勝"
   ],
     tournaments: {
@@ -372,7 +378,7 @@ export const players: Player[] = [
       white2025: true,
       white2026: true,
     },
-    notes: "2023CSはU-12部門で出場し優勝 / ほわいと杯2025では個人ダブルス両部門で出場、個人戦では準優勝 / ほわいと杯2026では個人戦で準優勝 / 第5回APマラソンで完走し優勝",
+    notes: "2023CSはU-12部門で出場し優勝 / ほわいと杯2025では個人ダブルス両部門で出場、個人戦では準優勝 / ほわいと杯2026では個人戦で準優勝 / 第5回APマラソンで完走し優勝 / CS2026 チーム「ドパるんちゅ」にて優勝",
   },
   {
     id: "abeyu",
@@ -448,6 +454,7 @@ export const players: Player[] = [
     achievements: [
     "ダブルス優勝",
     "ダブルス準優勝",
+    "チーム3位",
     "準決勝進出",
   ],
     tournaments: {
@@ -457,7 +464,7 @@ export const players: Player[] = [
       white2025: true,
       white2026: true,
     },
-    notes: "ほわいと杯2025 ダブルス部門で優勝 / ほわいと杯2026 ダブルス部門で準優勝 / 過去に「カルボナーラ24時」名義で出場",
+    notes: "ほわいと杯2025 ダブルス部門で優勝 / ほわいと杯2026 ダブルス部門で準優勝 / CS2026 チーム「大三元」にて3位 / 過去に「カルボナーラ24時」名義で出場",
   },
   {
     id: "kiranyan",
@@ -762,14 +769,16 @@ export const players: Player[] = [
     name: "たまご",
     twitter: "@tamagokutta",
     appearances: 2,
-    result: "準決勝",
+    result: "準優勝",
     achievements: [
+    "チーム準優勝",
     "準決勝進出"
   ],
     tournaments: {
       cs25: true,
       cs26: true,
     },
+    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
   },
   {
     id: "mu2iic",
@@ -1007,26 +1016,30 @@ export const players: Player[] = [
     name: "ひゎ",
     twitter: "@Hiwa_otogame",
     appearances: 1,
-    result: "準決勝",
+    result: "準優勝",
     achievements: [
+    "チーム準優勝",
     "準決勝進出"
   ],
     tournaments: {
       cs26: true,
     },
+    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
   },
   {
     id: "daba",
     name: "だば～",
     twitter: "@daba_kasu",
     appearances: 1,
-    result: "準決勝",
+    result: "準優勝",
     achievements: [
+    "チーム準優勝",
     "準決勝進出"
   ],
     tournaments: {
       cs26: true,
     },
+    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
   },
   {
     id: "esto",
@@ -1712,7 +1725,7 @@ export const players: Player[] = [
 {
   id: "miso",
   name: "みそ",
-  twitter: "@Honamizuki_",
+  twitter: "@HonaMizuki_",
   aliases: ["みそ"],
   appearances: 1,
   result: "準決勝",

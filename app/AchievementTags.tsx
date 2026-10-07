@@ -13,6 +13,7 @@ const rarityOrder: Achievement[] = [
   "チーム準優勝",
   "ダブルス準優勝",
   "個人3位",
+  "チーム3位",
   "個人4位",
   "個人5位",
 ];
@@ -22,7 +23,7 @@ const GAP = 6; // gap-1.5
 const achievementIcon = (achievement: Achievement) => {
   if (achievement.includes("準優勝")) return "🥈";
   if (achievement.includes("優勝")) return "🏆";
-  if (achievement === "個人3位") return "🥉";
+  if (achievement.includes("3位")) return "🥉";
   return null;
 };
 
