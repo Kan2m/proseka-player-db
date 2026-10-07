@@ -531,7 +531,7 @@ export const tournaments: Tournament[] = [
   date: "2026年",
   category: "チーム戦",
   description:
-    "4年ぶりのチーム戦。優勝はチーム「ドパるんちゅ」、準優勝は「ひまだわ～」、3位は「大三元」。",
+    "4年ぶりのチーム戦。優勝はチーム「ドパるんちゅ」、準優勝は「ひまだゎ～」、3位は「大三元」。",
   archives: [
     {
       title: "本戦",

@@ -778,7 +778,7 @@ export const players: Player[] = [
       cs25: true,
       cs26: true,
     },
-    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
+    notes: "CS2026 チーム「ひまだゎ～」にて準優勝",
   },
   {
     id: "mu2iic",
@@ -1024,7 +1024,7 @@ export const players: Player[] = [
     tournaments: {
       cs26: true,
     },
-    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
+    notes: "CS2026 チーム「ひまだゎ～」にて準優勝",
   },
   {
     id: "daba",
@@ -1039,7 +1039,7 @@ export const players: Player[] = [
     tournaments: {
       cs26: true,
     },
-    notes: "CS2026 チーム「ひまだわ～」にて準優勝",
+    notes: "CS2026 チーム「ひまだゎ～」にて準優勝",
   },
   {
     id: "esto",
