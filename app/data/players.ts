@@ -1607,7 +1607,7 @@ export const players: Player[] = [
 {
   id: "hita",
   name: "ひた",
-  twitter: "",
+  twitter: "@hita0718",
   aliases: ["ひた"],
   appearances: 1,
   result: "準々決勝",
